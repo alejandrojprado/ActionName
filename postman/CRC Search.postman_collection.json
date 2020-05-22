@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "17ce6d72-2872-42a0-855f-cda0382c2ce3",
+		"name": "CRC Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search Query - Exact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filters\": [\n\t\t{\n\t\t\t\"key\": \"message\",\n\t\t\t\"values\": [\"love\"],\n\t\t\t\"matchType\": [\"EXACT\"],\n\t\t\t\"filterType\": \"TEXT\"\n\t\t}\n\t],\n\t\"columns\": [\"id\", \"message\"],\n\t\"page\": 1,\n\t\"pageSize\": 10,\n\t\"sort\": {\n\t\t\"column\": \"id\",\n\t\t\"order\": \"DESC\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Query - Fuzzy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filters\": [\n\t\t{\n\t\t\t\"key\": \"message\",\n\t\t\t\"values\": [\"lova\"],\n\t\t\t\"matchType\": [\"FUZZY\"],\n\t\t\t\"filterType\": \"TEXT\"\n\t\t}\n\t],\n\t\"columns\": [\"id\", \"message\"],\n\t\"page\": 1,\n\t\"pageSize\": 10\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Query - Contained",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filters\": [\n\t\t{\n\t\t\t\"key\": \"message\",\n\t\t\t\"values\": [\"love\"],\n\t\t\t\"matchType\": [\"CONTAINED\"],\n\t\t\t\"filterType\": \"TEXT\"\n\t\t}\n\t],\n\t\"columns\": [\"id\", \"message\"],\n\t\"page\": 1,\n\t\"pageSize\": 10\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Query - Show all columns",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filters\": [\n\t\t{\n\t\t\t\"key\": \"message\",\n\t\t\t\"values\": [\"love\"],\n\t\t\t\"matchType\": [\"EXACT\"],\n\t\t\t\"filterType\": \"TEXT\"\n\t\t}\n\t],\n\t\"columns\": [], \n\t\"page\": 1,\n\t\"pageSize\": 10\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Query - By range",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filters\": [\n\t\t{\n\t\t\t\"key\": \"message_date\",\n\t\t\t\"filterType\": \"RANGE\",\n\t\t\t\"rangeValues\": [\n\t\t\t\t{\n\t\t\t\t\t\"from\": \"2019-02-28T00:00:00.000Z\",\n\t\t\t\t\t\"to\": \"2020-04-28T00:00:00.000Z\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"columns\": [\"id\", \"message\", \"message_date\"],\n\t\"page\": 1,\n\t\"pageSize\": 100\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login [Run this before using the API]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a8c8fe1-1335-43ca-b47f-4a86f50305fc",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cGxhdGZvcm0tc2VydmljZXM6c2VjcmV0"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9001/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Active Columns",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/api/v1/search/columns",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"columns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save User Column",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\": 1,\n\t\"columnId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/user/column",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"user",
+						"column"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Columns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/user/column",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"user",
+						"column"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Column",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\": 1,\n\t\"columnId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/api/v1/search/user/column",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"user",
+						"column"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

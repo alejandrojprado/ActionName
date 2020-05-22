@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
+  jmx:
+    enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: mssearch
+
+logging.level.com.mahisoft.kamino.mssearch: INFO
+
+server:
+  port: 0
+  servlet:
+    context-path: /api
+
+kamino:
+  commons:
+    auth:
+      authentication-enabled: false
+
+elasticsearch:
+  cluster:
+    ip: 127.0.0.1
+    port: 9200
+
+columns-config:
+  contained-keys:
+    - message
+    - group_name
+    - user_name
+    - first_name
+    - last_name
+    - phone
+    - message
+    - locate_country
+    - locate_region
+    - locate_city
+    - locate_county
+
+
+
+---
+spring:
+  profiles: build

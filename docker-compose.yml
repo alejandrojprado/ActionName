@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+  ms-search:
+    container_name: ms-search
+    build: .
+    ports:
+      - 9000:9000
+    environment:
+      SPRING_PROFILES_ACTIVE: local,doc
+      CLUSTER_NAME: bnCluster
+      CLUSTER_IP: 35.237.124.72
+      CLUSTER_PORT: 9200
+  db:
+    container_name: ms-search-db
+    image: percona:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'search'
+      MYSQL_ROOT_PASSWORD: 'mahisoft-dev'
+    volumes:
+      - search_data:/var/lib/mysql
+
+  crc-db:
+    container_name: crc-db
+    image: percona:latest
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: 'MahisoftCRCTest'
+      MYSQL_ROOT_PASSWORD: 'mahisoft-dev'
+    volumes:
+      - crc_data:/var/lib/mysql
+volumes:
+  crc_data:
+  search_data:
+
+#  config:
+#    container_name: config
+#    image: gcr.io/kamino-182816/ms-config-service:latest-snapshot
+#    ports:
+#      - 8888:8888
+#    environment:
+#      CONFIG_DATA_URI: git@bitbucket.org:mahisoft/kamino-config-data.git
+#      CONFIG_HOST_KEY: AAAAB3NzaC1yc2EAAAADAQABAAACAQC31MhMX2Rbdh9/5SXteyIBSN3vHNy3OBPiNVgA5ytCRYC2KKRJ2biCrs93grxlBitegWsZL3dN/utzH5pD9s0ALT3SaH4DehKxKHWYdybD4K2RAnEnGDLSozunv1mHQpvqFS5LcKpHo8M1QqXQbLoAewm0f5sfZX1TKSVeujIthIpA7bNDMRa0Muh/51ozyjBmdm/doAAUaSYPnZvpE1WlKIaCljrvhqjaxL37ZZ/CMCqbRZ7Ws79nW+ukrvGaCy/lEB4h9O7ayH3Irh7pEF3S+nlZJVBIDd3UmhNrt/PM454kKlRJoC9ahYGgMBJW/bIk76zODiuV/+ej5bjfal0YEZJYzLPnc6rmrJ71sDg6YLseYNtJnSOmRF+Q9a7A5K2Zrpqj9xne+PC5nnpXVPCSDUemP1RNMWswDhlTYd5yy0mnkOpnEUtgcdLzNGfnghqGVk247zKeZ3c1HfTTyuDLGrD94Qh8gAJ6ogqsXPKo6so3VZ0BD+HFvw5LXf+UM+wovRkWXVwMPxzQlba2/wZ6NLIbOlbwNlPOnR692i3c3n2CRIPUF9doXknRsxKaIHTT/VklR4HNZRTiWfHiGhsInM/Ml5rjvEPO0rnA1Kzh3qA0krvOqrSh+K3Bl1X7Nu5PjO08lwrv/+fKyxehIwiJCVr++o+4reDhFd29tDD70Q==
+#      CONFIG_PRIVATE_KEY: |
+#        -----BEGIN RSA PRIVATE KEY-----
+#        MIIJKgIBAAKCAgEAt9TITF9kW3Yff+Ul7XsiAUjd7xzctzgT4jVYAOcrQkWAtiik
+#        Sdm4gq7Pd4K8ZQYrXoFrGS93Tf7rcx+aQ/bNAC090mh+A3oSsSh1mHcmw+CtkQJx
+#        Jxgy0qM7p79Zh0Kb6hUuS3CqR6PDNUKl0Gy6AHsJtH+bH2V9UyklXroyLYSKQO2z
+#        QzEWtDLof+daM8owZnZv3aAAFGkmD52b6RNVpSiGgpY674ao2sS9+2WfwjAqm0We
+#        1rO/Z1vrpK7xmgsv5RAeIfTu2sh9yK4e6RBd0vp5WSVQSA3d1JoTa7fzzOOeJCpU
+#        SaAvWoWBoDASVv2yJO+szg4rlf/no+W432pdGBGSWMyz53Oq5qye9bA4OmC7HmDb
+#        SZ0jpkRfkPWuwOStma6ao/cZ3vjwuZ56V1Twkg1Hpj9UTTFrMA4ZU2HecstJp5Dq
+#        ZxFLYHHS8zRn54IahlZNuO8ynmd3NR3008rgyxqw/eEIfIACeqIKrFzyqOrKN1Wd
+#        AQ/hxb8OS13/lDPsKL0ZFl1cDD8c0JW2tv8GejSyGzpW8DZTzp0evdot3N59gkSD
+#        1BfXaF5J0bMSmiB00/1ZJUeBzWUU4lnx4hobCJzPzJea47xDztK5wNSs4d6gNJK7
+#        zqq0ofitwZdV+zbuT4ztPJcK7//nyssXoSMIiQla/vqPuK3g4RXdvbQw+9ECAwEA
+#        AQKCAgEAluI4MK9PMN7IRfIv6jbZl1JWjq8S3fNSJqYAAGW9FNz1Iw5CojbogaK3
+#        uHD+7rBcomn5HKff9Y2ZdVloBgapBk8b4fpQC8yDURNTSfvqPnXIIDBv7VWoSUkf
+#        arTc5+8dB8mwwMzNhpV8YNe+P08ub7yNH7BpAyEK91nbSV/sVX3m+Bnhu/Grn+X0
+#        /R5H5CA9D6yAbtinmBkh20lSscBj2HZlyQNDhlvxdfZrtM8ZjIp6Pg2rrK/GFzDU
+#        Pcw1k2lBO3K6OMbP0ZUj4LZBuqvrRoK9XRUKSsnO3HRGInDO08mzgB2aJwAqPdM8
+#        rN0oAGykbjqmjE4HKkvrtZOU5RNpKjZjkctEz7skVxaPwjmE6+00/ro5wqPLJLav
+#        r+hZmXtaeVQJEk87jOc2uBzlxWlWoVBB0MKQAZSn3J1vbptnFUPmYf9rtueGVeo+
+#        HpA7AXNBHGF7XIYnf86M9B7Q+AUUglIFZabKxonq+7hlHctuPzUzf53V1MBLphCv
+#        usRlsxSwA9I1k/AL2u3ED4j3AA7t9QY3Ncpct3x9iiuivlQ6uVRDTBOdWlLdw77L
+#        wsZ2K3sx0abCBay5Vbey45RCVTnqbCIo9ETaf10BQLI84B2yxMYdrTbxc2LGYKpJ
+#        xmUCnY353CCNVbavUKHHYl/qHSO8zZm8u59+Dq2b2XPexSMvWpECggEBAOaPMNTc
+#        zmPG6oBT02CvzmvM+9qQ0aLmtz++dz0wNOjmjx1u6azZegVNriEpW9vQ4NSC8t7M
+#        QQMhGY3f+1wdoDaAh/HvhVACGF+MfgErYJfsmmp89Il31INNOr7A6rWwQzRPHYmP
+#        hHSKdsYhutOORtjuhc36YYz9sATgnipld5lP5c/cznt6oWzbkjHG6512nNnLf+7k
+#        njEa3C0uaE1Omz9isj1enAX5K0nQ+COkysxNR4D2NcSej61bOQDLfPx1ibjzfd3+
+#        WyF6FXZGlbcv3WzDGDgx2IgAY95ZgW8C318ZDCIPLRrY0FDwYzPkhquosObDH9Ki
+#        rZJK2KInklsze50CggEBAMwdnvZRtUlXwpLIYcIrvVyQ6ak8Lqtk3/ht/mhd3wf0
+#        1xbuDB4bMjN+CnVnBAjLCvElqyMdlthnSyehyv2EPqvcFtnPMitfHoVrDoKUFTK5
+#        sLlROL37wFlSRUg8EYagXBWm0ufamf2wRSN9DWw6UFb6E6q4753rzDmmFMeCfV/3
+#        sl7y7pGoBtQRci8nsgi93yc5h7tZ3lkXz4OCRiUfROaPgDebGo1szkxe6hogG3pz
+#        NLSG7ovfdwg2yvTsJ6LDCRkcQ4q8Hn8sIqose9K0FVchHhoigVl1l0WmTz/1ZfC+
+#        y3wR0KoEULnl7GwQpZUAHLZJliistoeQa/LGfkMNjMUCggEBALL7XfEhKKeUd97/
+#        NAzO7fQJwUo/Oj631HILrg02KxzSPy+eNpEUkwEi+JaNwN24HZFbxqbm8WE4hNn6
+#        kutDpGgrB13tjxQ5TCqAqiDGR8ooxwb70eoVuEfl4EDNCmfZWZJ2CHwNicne462T
+#        6bDptl4ZbI4mXSxSlB51MNPAyUOfHsxqoXCCFmanXap+vdITjlgU/k+58oQ0UdBR
+#        Qm8hIqvmNnAlzgFlGRHIw5kICNbo9yVJ/RuR6/+r3Wicj3580FlfzMpU9vHaEGct
+#        DHSVF9Oi8F5Pc8TAaMbnvO8sz7LHgv+9wEojHjR3KMvUECeaYRoDR+UAnLYAnIPl
+#        LFzYbpECggEBAMU1LTuBUC0PbH9SuRjYF7mSjR8kdVbFPJuS8kU1xOG0DggqcGy6
+#        C/OyKDqsEDrKqcS5hzKDSRXGHteouy3bko2LNEy2ohtDaIKxH7DLj/uVawhxT+hG
+#        jt393dBfsPMohi+pIYY/L57qqrISBWD2ql6OeWfuDBzBEGz2aIcmLSoGcEDKZ/M0
+#        q3xDatXifWFyyWLlc51ww6HCnozJ1inRn0k/hjqzUaEoad1hqr8ZHFNfcaGl6F4d
+#        xqyZ+9dNPzJDS8wGAb/N540pQEi4d93ofeHTrnjDs8OSGFiDyXfbCeXjAUjbEYbi
+#        anhhi94Q61odZKA+UqTz0dsCjzldy+nO8p0CggEATjGVVD7L3KZp0pR5skKSwNr7
+#        Ln/FC+Uv3EYY8ppePsKoGpEQhX5uakW8gnJAdZWIFn+maWr7O8RF3/wvTZL4uQhI
+#        SIFmwtN9EGvEwYdaklt3SlaUe7w6np5H2TCl6tBQe+Wk27/YgRimNB8Niwq32EYi
+#        jFxxrqvp+kJ04uvk9/ARorUFxtfbCkp4eEVIAJojRefVuvHeBnzFW8ey7c5XXCOn
+#        L46rNusJqVoh3kXCsEYz7QdU/wcgHpM4Ej15ArbFuCJWGXs5kg+a+PhOUROwc9JU
+#        WHOwP35hxBk2d7DwLqThQzkH+6qE3aiuS0yvOARQCpohzVph/KVJ2aeU40zbrw==
+#        -----END RSA PRIVATE KEY-----
+#      CONFIG_HOST_KEY_ALGORITHM: ssh-rsa

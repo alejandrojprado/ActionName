@@ -1,0 +1,36 @@
+{
+  "settings": {
+    "analysis": {
+      "normalizer": {
+        "lowercase": {
+          "type": "custom",
+          "filter": [
+            "lowercase"
+          ]
+        }
+      },
+      "filter": {
+        "ngram_filter": {
+          "type": "ngram",
+          "min_gram": 3,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "ngram_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "ngram_filter"
+          ]
+        }
+      }
+    },
+    "max_result_window": 100,
+    "number_of_replicas": "2",
+    "number_of_shards": "5",
+    "auto_expand_replicas": "0-all",
+    "max_ngram_diff" : "50"
+  }
+}
