@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColumnService.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service</a> &gt; <span class="el_source">ColumnService.kt</span></div><h1>ColumnService.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service
+
+import com.mahisoft.kamino.mssearch.dto.IndexColumn
+import com.mahisoft.kamino.mssearch.dto.IndexColumnResponse
+import com.mahisoft.kamino.mssearch.dto.UserColumnRequest
+import com.mahisoft.kamino.mssearch.exception.ExistentRelationException
+import com.mahisoft.kamino.mssearch.service.search.domain.IndexColumnEntity
+import com.mahisoft.kamino.mssearch.service.search.domain.UserColumnEntity
+import com.mahisoft.kamino.mssearch.service.search.mapping.toDto
+import com.mahisoft.kamino.mssearch.service.search.repository.IndexColumnRepository
+import com.mahisoft.kamino.mssearch.service.search.repository.UserColumnRepository
+import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Service
+import javax.persistence.EntityNotFoundException
+
+/**
+ * Service to perform queries over elastic search index
+ */
+@Service
+<span class="fc" id="L20">class ColumnService(</span>
+<span class="fc" id="L21">    val indexColumnRepository: IndexColumnRepository,</span>
+<span class="fc" id="L22">    val userColumnRepository: UserColumnRepository</span>
+) {
+
+    companion object {
+        const val DEFAULT_MINUS_DAYS: Long = 7
+        const val SINGLE_VALUE = 1
+
+        @Suppress(&quot;JAVA_CLASS_ON_COMPANION&quot;)
+<span class="fc" id="L30">        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)</span>
+    }
+
+    /**
+     * Called to get all active index columns
+     *
+     * @return a list of IndexColumn
+     */
+    fun getActiveColumns(): IndexColumnResponse {
+<span class="fc" id="L39">        return getColumnsResult(indexColumnRepository.findActiveColumns())</span>
+    }
+
+    /**
+     * Called to get all active index columns
+     *
+     * @return a list of IndexColumn
+     */
+    fun getFilterColumns(): IndexColumnResponse {
+<span class="fc" id="L48">        return getColumnsResult(indexColumnRepository.findFilterColumns())</span>
+    }
+
+    /**
+     * Called to get all active index columns
+     *
+     * @return a list of IndexColumn
+     */
+    fun getDisplayColumns(): IndexColumnResponse {
+<span class="fc" id="L57">        return getColumnsResult(indexColumnRepository.findDisplayColumns())</span>
+    }
+
+    /**
+     * Called to get the selected columns by a user to filter the search results
+     *
+     * @return a list of IndexColumn
+     */
+    // TODO: Figure out how to get the real userId
+    fun getUserColumns(): IndexColumnResponse {
+<span class="fc" id="L67">        val userId: Long = 1</span>
+<span class="fc" id="L68">        return getColumnsResult(indexColumnRepository.findUserColumns(userId))</span>
+    }
+
+    /**
+     * Called to map all the index column entities to a index column dto
+     *
+     * @param indexColumnEntityList a list of IndexColumnEntity
+     *
+     * @return a list if index column dto
+     */
+    private fun getColumnsResult(indexColumnEntityList: List&lt;IndexColumnEntity&gt;): IndexColumnResponse {
+<span class="fc" id="L79">        val resultList = arrayListOf&lt;IndexColumn&gt;()</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (indexColumnEntity in indexColumnEntityList) {</span>
+<span class="fc" id="L81">            resultList.add(toDto(indexColumnEntity))</span>
+        }
+<span class="fc" id="L83">        return IndexColumnResponse(columns = resultList)</span>
+    }
+
+    /**
+     * Called to add a column/user relation
+     *
+     * @param userColumnRequest a object with the columnId
+     *
+     * @throws EntityNotFoundException in case the specified columns don't exists.
+     * @throws ExistentRelationException in case the column/user relation already exists.
+     *
+     */
+    // TODO: Figure out how to get the real userId
+    fun addUserColumn(userColumnRequest: UserColumnRequest) {
+<span class="fc" id="L97">        val userId: Long = 1</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        val columnCode = userColumnRequest.columnCode!!</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (!indexColumnRepository.existsByColumnCode(columnCode))</span>
+<span class="fc" id="L100">            throw EntityNotFoundException(&quot;The column id does not exists.&quot;)</span>
+<span class="fc" id="L101">        val indexColumn = indexColumnRepository.findByColumnCode(columnCode)</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        val columnId = indexColumn.id!!</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (userColumnRepository.existsByColumnIdAndUserId(columnId, userId))</span>
+<span class="fc" id="L104">            throw ExistentRelationException(&quot;The column is already related to the user.&quot;)</span>
+<span class="fc" id="L105">        val userColumnEntity = UserColumnEntity(columnId = columnId, userId = userId)</span>
+<span class="fc" id="L106">        userColumnRepository.save(userColumnEntity)</span>
+<span class="fc" id="L107">    }</span>
+
+    /**
+     * Called to delete a column/user relation
+     *
+     * @param userColumnRequest with the columnId
+     *
+     * @throws EntityNotFoundException in case the specified columns don't exists or the column/user relation don't exists.
+     */
+    // TODO: Figure out how to get the real userId
+    fun deleteUserColumn(userColumnRequest: UserColumnRequest) {
+<span class="fc" id="L118">        val userId: Long = 1</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        val columnCode = userColumnRequest.columnCode!!</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (!indexColumnRepository.existsByColumnCode(columnCode))</span>
+<span class="fc" id="L121">            throw EntityNotFoundException(&quot;The column id does not exists.&quot;)</span>
+<span class="fc" id="L122">        val indexColumn = indexColumnRepository.findByColumnCode(columnCode)</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        val columnId = indexColumn.id!!</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if (!userColumnRepository.existsByColumnIdAndUserId(columnId, userId))</span>
+<span class="fc" id="L125">            throw EntityNotFoundException(&quot;This column user/relation does not exists.&quot;)</span>
+<span class="fc" id="L126">        val userColumnEntity = userColumnRepository.findByColumnIdAndUserId(columnId, userId)</span>
+<span class="fc" id="L127">        userColumnRepository.delete(userColumnEntity)</span>
+<span class="fc" id="L128">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

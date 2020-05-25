@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageMapper.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service.search.mapping</a> &gt; <span class="el_source">MessageMapper.kt</span></div><h1>MessageMapper.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service.search.mapping
+
+import com.mahisoft.kamino.mssearch.dto.Message
+import com.mahisoft.kamino.mssearch.service.search.domain.MessageDocument
+
+/**
+ * Used to transform documents to dto
+ */
+<span class="fc" id="L9">object MessageMapper {</span>
+    fun toDto(messageDocument: MessageDocument): Message =
+<span class="fc" id="L11">        Message(</span>
+<span class="fc" id="L12">            uuid = messageDocument.uuid,</span>
+<span class="fc" id="L13">            groupId = messageDocument.groupId,</span>
+<span class="fc" id="L14">            message = messageDocument.message,</span>
+<span class="fc" id="L15">            gigaFlag = messageDocument.gigaFlag,</span>
+<span class="fc" id="L16">            locateCity = messageDocument.locateCity,</span>
+<span class="fc" id="L17">            locateCountry = messageDocument.locateCountry,</span>
+<span class="fc" id="L18">            locateCounty = messageDocument.locateCounty,</span>
+<span class="fc" id="L19">            locateLat = messageDocument.locateLat,</span>
+<span class="fc" id="L20">            locateLon = messageDocument.locateLon,</span>
+<span class="fc" id="L21">            locateRegion = messageDocument.locateRegion,</span>
+<span class="fc" id="L22">            rowId = messageDocument.rowId,</span>
+<span class="fc" id="L23">            webFlag = messageDocument.webFlag,</span>
+<span class="fc" id="L24">            chatType = messageDocument.chatType,</span>
+<span class="fc" id="L25">            dateAdded = messageDocument.dateAdded,</span>
+<span class="fc" id="L26">            documentFileName = messageDocument.documentFileName,</span>
+<span class="fc" id="L27">            firstName = messageDocument.firstName,</span>
+<span class="fc" id="L28">            fqdn = messageDocument.fqdn,</span>
+<span class="fc" id="L29">            documentMimeType = messageDocument.documentMimeType,</span>
+<span class="fc" id="L30">            height = messageDocument.height,</span>
+<span class="fc" id="L31">            id = messageDocument.id,</span>
+<span class="fc" id="L32">            ipAddress = messageDocument.ipAddress,</span>
+<span class="fc" id="L33">            ircChannel = messageDocument.ircChannel,</span>
+<span class="fc" id="L34">            ircPort = messageDocument.ircPort,</span>
+<span class="fc" id="L35">            ircServer = messageDocument.ircServer,</span>
+<span class="fc" id="L36">            isScam = messageDocument.isScam,</span>
+<span class="fc" id="L37">            isUc = messageDocument.isUc,</span>
+<span class="fc" id="L38">            lastName = messageDocument.lastName,</span>
+<span class="fc" id="L39">            licenseId = messageDocument.licenseId,</span>
+<span class="fc" id="L40">            date = messageDocument.loggedDate,</span>
+<span class="fc" id="L41">            messageDate = messageDocument.messageDate,</span>
+<span class="fc" id="L42">            messageId = messageDocument.messageId,</span>
+<span class="fc" id="L43">            onlineLast = messageDocument.onlineLast,</span>
+<span class="fc" id="L44">            phone = messageDocument.phone,</span>
+<span class="fc" id="L45">            senderId = messageDocument.senderId,</span>
+<span class="fc" id="L46">            sn = messageDocument.sn,</span>
+<span class="fc" id="L47">            statMessage = messageDocument.statMessage,</span>
+<span class="fc" id="L48">            statRecipient = messageDocument.statRecipient,</span>
+<span class="fc" id="L49">            sysMessage = messageDocument.sysMessage,</span>
+<span class="fc" id="L50">            type = messageDocument.type,</span>
+<span class="fc" id="L51">            userName = messageDocument.userName,</span>
+<span class="fc" id="L52">            width = messageDocument.width,</span>
+<span class="fc" id="L53">            network = messageDocument.network,</span>
+<span class="fc" id="L54">            groupName = messageDocument.groupName,</span>
+<span class="fc" id="L55">            imageDate = messageDocument.imageDate,</span>
+<span class="fc" id="L56">            imageId = messageDocument.imageId,</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">            location = messageDocument.location?.toString(),</span>
+<span class="fc" id="L58">            onlineLastIndicator = messageDocument.onlineLastIndicator,</span>
+<span class="fc" id="L59">            fdqn = messageDocument.fdqn,</span>
+<span class="fc" id="L60">            isBot = messageDocument.isBot,</span>
+<span class="fc" id="L61">            channel = messageDocument.channel</span>
+<span class="fc" id="L62">        )</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

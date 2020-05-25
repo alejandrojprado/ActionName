@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchService.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service</a> &gt; <span class="el_source">SearchService.kt</span></div><h1>SearchService.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service
+
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.mahisoft.kamino.mssearch.config.ElasticSearchColumnsConfiguration
+import com.mahisoft.kamino.mssearch.dto.ResultPage
+import com.mahisoft.kamino.mssearch.dto.SearchRequestDto
+import com.mahisoft.kamino.mssearch.dto.filters.CustomSortOrder
+import com.mahisoft.kamino.mssearch.dto.filters.Filter
+import com.mahisoft.kamino.mssearch.dto.filters.FilterType
+import com.mahisoft.kamino.mssearch.dto.filters.MatchType
+import com.mahisoft.kamino.mssearch.dto.filters.RangeFilter
+import com.mahisoft.kamino.mssearch.exception.CustomException
+import com.mahisoft.kamino.mssearch.service.util.Util.Companion.transformSearchResult
+import org.elasticsearch.action.search.SearchRequest
+import org.elasticsearch.client.RequestOptions
+import org.elasticsearch.client.RestHighLevelClient
+import org.elasticsearch.index.query.BoolQueryBuilder
+import org.elasticsearch.index.query.Operator
+import org.elasticsearch.index.query.QueryBuilder
+import org.elasticsearch.index.query.QueryBuilders.boolQuery
+import org.elasticsearch.index.query.QueryBuilders.matchQuery
+import org.elasticsearch.index.query.QueryBuilders.rangeQuery
+import org.elasticsearch.search.builder.SearchSourceBuilder
+import org.elasticsearch.search.sort.SortOrder
+import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Service
+
+/**
+ * Service to perform queries over elastic search index
+ */
+@Service
+<span class="fc" id="L32">class SearchService(</span>
+<span class="fc" id="L33">    val client: RestHighLevelClient,</span>
+<span class="fc" id="L34">    val objectMapper: ObjectMapper,</span>
+<span class="fc" id="L35">    val elasticSearchColumnsConfiguration: ElasticSearchColumnsConfiguration</span>
+) {
+
+    companion object {
+        const val SINGLE_VALUE = 1
+
+        @Suppress(&quot;JAVA_CLASS_ON_COMPANION&quot;)
+<span class="fc" id="L42">        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)</span>
+    }
+
+    /**
+     * Called to make a search using the filters received from the controller
+     *
+     * @param searchRequest an instance with the filters of the search
+     *
+     * @return a ResultPage instance with the results
+     */
+    fun search(searchRequest: SearchRequestDto): ResultPage {
+<span class="fc" id="L53">        return applySearch(createQuery(searchRequest), searchRequest)</span>
+    }
+
+    /**
+     * Called to iterate over the received filter and create a query with the required filters
+     *
+     * @param searchRequestDto an instance with the filters of the search
+     *
+     * @return a BoolQueryBuilder instance representing the query
+     */
+    private fun createQuery(searchRequestDto: SearchRequestDto): BoolQueryBuilder {
+<span class="fc" id="L64">        val baseQuery = boolQuery()</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (filter in searchRequestDto.filters) {</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">            getQueryBuilderByType(filter)?.let {</span>
+<span class="fc" id="L67">                baseQuery.must(it)</span>
+            }
+        }
+<span class="fc" id="L70">        return baseQuery</span>
+    }
+
+    /**
+     * Called to get a query builder based on the type of the filter
+     *
+     * @param filter a filter object
+     *
+     * @return a QueryBuilder instance
+     */
+    fun getQueryBuilderByType(filter: Filter): QueryBuilder? {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        return when (filter.filterType) {</span>
+            FilterType.TEXT -&gt; {
+<span class="fc" id="L83">                addTextQuery(filter)</span>
+            }
+            FilterType.RANGE -&gt; {
+<span class="fc" id="L86">                addRangeQuery(filter)</span>
+            }
+        }
+    }
+
+    /**
+     * Called to get a queryBuilder based on the MatchType
+     *
+     * @param key the name of the column in the index
+     * @param value the value to search for
+     * @param matchType the type of the query to return
+     *
+     * @return a QueryBuilder instance
+     */
+    fun getQueryByType(key: String, value: String, matchType: MatchType): QueryBuilder {
+<span class="fc bfc" id="L101" title="All 3 branches covered.">        return when (matchType) {</span>
+            MatchType.EXACT -&gt; {
+<span class="fc" id="L103">                matchQuery(key, value.toLowerCase()).operator(Operator.AND)</span>
+            }
+            MatchType.FUZZY -&gt; {
+<span class="fc" id="L106">                matchQuery(key, value.toLowerCase()).fuzziness(2).prefixLength(1).operator(Operator.AND)</span>
+            }
+            MatchType.CONTAINED -&gt; {
+<span class="fc" id="L109">                matchQuery(checkContainedKey(key), value.toLowerCase()).operator(Operator.AND)</span>
+            }
+        }
+    }
+
+    private fun checkContainedKey(key: String) =
+<span class="fc bfc" id="L115" title="All 2 branches covered.">            if (elasticSearchColumnsConfiguration.containedKeys.contains(key)) &quot;$key.contained&quot; else key</span>
+
+    /**
+     * Called to create a TEXT query from a list of values, the properties 'values' and 'matchType' should have the
+     * same size if not the the functions is going to throw a CustomException, if multiple values are sent for the same
+     * key then the query is created as a should &lt;OR&gt;.
+     *
+     * @param filter the Filter instance with all the information of the request
+     *
+     * @return a QueryBuilder builder object, return null in case the values are empty or null
+     *
+     */
+    fun addTextQuery(filter: Filter): QueryBuilder? {
+<span class="fc bfc" id="L128" title="All 6 branches covered.">        if (filter.values?.size != filter.matchType?.size)</span>
+<span class="fc" id="L129">            throw CustomException(&quot;The property values and matchType should have the same length.&quot;)</span>
+
+<span class="pc bfc" id="L131" title="All 2 branches covered.">        filter.values?.let {</span>
+<span class="pc bpc" id="L132" title="2 of 4 branches missed.">            if (it.isNotEmpty()) {</span>
+<span class="pc bpc" id="L133" title="1 of 4 branches missed.">                return if (filter.values!!.size == SINGLE_VALUE) {</span>
+<span class="pc bpc" id="L134" title="2 of 4 branches missed.">                    getQueryByType(filter.key, filter.values!!.first(), filter.matchType!!.first())</span>
+                } else {
+<span class="fc" id="L136">                    val tempQueryBuilder = boolQuery()</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                    filter.values!!.forEachIndexed { i, value -&gt;</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                        tempQueryBuilder.should(getQueryByType(filter.key, value, filter.matchType!![i]))</span>
+<span class="fc" id="L139">                    }</span>
+<span class="fc" id="L140">                    tempQueryBuilder</span>
+                }
+            }
+<span class="nc" id="L143">        }</span>
+<span class="fc" id="L144">        return null</span>
+    }
+
+    /**
+     * Called to create a RANGE query from a list of values, if the list has only a single value then returns a
+     * query of the type rangeQuery, if it has multiple values then it returns a boolQuery with a chain of 'should'
+     * with the type of rangeQuery.
+     *
+     * @param filter the Filter instance with all the information of the request
+     *
+     * @return a QueryBuilder builder object, return null in case the values are empty or null
+     *
+     */
+    fun addRangeQuery(filter: Filter): QueryBuilder? {
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        filter.rangeValues?.let {</span>
+<span class="fc bfc" id="L159" title="All 4 branches covered.">            if (it.isNotEmpty()) {</span>
+<span class="pc bpc" id="L160" title="1 of 4 branches missed.">                return if (filter.rangeValues!!.size == SINGLE_VALUE) {</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                    getRangeFilter(filter.key, filter.rangeValues!!.first())</span>
+                } else {
+<span class="fc" id="L163">                    val tempQueryBuilder = boolQuery()</span>
+<span class="pc bpc" id="L164" title="1 of 4 branches missed.">                    for (rangeValue in filter.rangeValues!!) {</span>
+<span class="fc" id="L165">                        tempQueryBuilder.should(getRangeFilter(filter.key, rangeValue))</span>
+                    }
+<span class="fc" id="L167">                    tempQueryBuilder</span>
+                }
+            }
+<span class="fc" id="L170">        }</span>
+<span class="fc" id="L171">        return null</span>
+    }
+
+    /**
+     * Called to build a rangeQuery using the filter information
+     *
+     * @param key is the name of the column in the index
+     * @param rangeFilter is the instance of the rangeQuery from, to
+     *
+     * @return a rangeQuery instance
+     */
+<span class="fc" id="L182">    fun getRangeFilter(key: String, rangeFilter: RangeFilter): QueryBuilder = rangeQuery(key)</span>
+<span class="fc" id="L183">            .gte(rangeFilter.from)</span>
+<span class="fc" id="L184">            .lte(rangeFilter.to)</span>
+
+    /**
+     * Called to execute the query and return the results
+     *
+     * @param queryBuilder the query to execute
+     * @param searchRequestDto the search request received from the user
+     */
+    private fun applySearch(queryBuilder: QueryBuilder, searchRequestDto: SearchRequestDto): ResultPage {
+<span class="fc" id="L193">        logger.info(&quot;Query: $queryBuilder&quot;)</span>
+<span class="fc" id="L194">        val searchRequest = SearchRequest()</span>
+<span class="fc" id="L195">        val searchSourceBuilder = SearchSourceBuilder()</span>
+<span class="fc" id="L196">        val includeColumns = searchRequestDto.columns</span>
+
+<span class="fc" id="L198">        searchSourceBuilder.query(queryBuilder)</span>
+<span class="fc" id="L199">        setPageParameters(searchRequestDto, searchSourceBuilder)</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">        searchRequestDto.sort?.let {</span>
+<span class="fc" id="L201">            searchSourceBuilder.sort(it.column, getSortOrder(it.order))</span>
+        }
+<span class="pc bpc" id="L203" title="2 of 4 branches missed.">        if (includeColumns.isNotEmpty())</span>
+<span class="fc" id="L204">            searchSourceBuilder.fetchSource(includeColumns.toTypedArray(), arrayOf())</span>
+
+<span class="fc" id="L206">        searchRequest.source(searchSourceBuilder)</span>
+<span class="fc" id="L207">        val searchResponse = client.search(searchRequest, RequestOptions.DEFAULT)</span>
+<span class="fc" id="L208">        return ResultPage(searchResponse.hits.totalHits, transformSearchResult(searchResponse, objectMapper))</span>
+    }
+
+    /**
+     * Called to map the custom sort order to elasticsearch sort order
+     *
+     * @param sortOrder the value of the sort order
+     *
+     * @return a SortOrder value of elasticsearch
+     */
+    fun getSortOrder(sortOrder: CustomSortOrder): SortOrder {
+<span class="pc bpc" id="L219" title="1 of 3 branches missed.">        return when (sortOrder) {</span>
+            CustomSortOrder.ASC -&gt; {
+<span class="fc" id="L221">                SortOrder.ASC</span>
+            }
+            CustomSortOrder.DESC -&gt; {
+<span class="fc" id="L224">                SortOrder.DESC</span>
+            }
+            else -&gt; {
+<span class="nc" id="L227">                SortOrder.ASC</span>
+            }
+        }
+    }
+
+    /**
+     * Called to set the pagination parameters, the pagination needs to parameters the page number 1,2,3 and the amount
+     * of results per page
+     *
+     * @param searchRequestDto the search request received from the user
+     * @param searchSourceBuilder
+     *
+     */
+    private fun setPageParameters(searchRequestDto: SearchRequestDto, searchSourceBuilder: SearchSourceBuilder) {
+<span class="pc bpc" id="L241" title="1 of 2 branches missed.">        if (searchRequestDto.page != null)</span>
+<span class="pc bpc" id="L242" title="2 of 4 branches missed.">            searchSourceBuilder.from((searchRequestDto.page!! - 1) * searchRequestDto.pageSize!!)</span>
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">        if (searchRequestDto.pageSize != null)</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">            searchSourceBuilder.size(searchRequestDto.pageSize!!)</span>
+<span class="fc" id="L245">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
