@@ -59,6 +59,7 @@ jobs:
         
     - name: version tag
       id: version-tag
+      run: |
         if [ "$(git describe --tag)" = "" ]
         then
           echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
