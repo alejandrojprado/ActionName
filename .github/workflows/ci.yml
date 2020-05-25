@@ -40,9 +40,13 @@ jobs:
           echo "::set-output name=LATEST_TAG::''"
         fi
         
-    - name: Build and push Docker image
-      run: |
-        docker login docker.pkg.github.com -u github.repository_owner --password ${{ github.token }}
-        export repo_name=${{ github.repository }}
-        docker build . -t docker.pkg.github.com/"$(echo ${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
-        docker push docker.pkg.github.com/"$(echo ${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
+    - name: test
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ${{ github.repository }}
+        path: chat-service
+        tag: ${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
+
