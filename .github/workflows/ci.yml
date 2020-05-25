@@ -62,9 +62,11 @@ jobs:
       run: |
         if [ "${GITHUB_REF/refs\/tags\//}" = "" ]
         then
+          echo no tag
           echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
         else
-          echo "::set-output name=VERSION_TAG::'$(git describe --tag)'"
+          echo '${GITHUB_REF/refs\/tags\//}'
+          echo "::set-output name=VERSION_TAG::'${GITHUB_REF/refs\/tags\//}'"
         fi
         
     - name: latest tag
@@ -72,9 +74,9 @@ jobs:
       run: |
         if [ "${GITHUB_REF:11}" = "develop" ]
         then 
-          echo "master"
+          echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
         else
-          echo "otro"
+          echo "::set-output name=LATEST_TAG::''"
         fi
         
     - name: Build and push Docker image
