@@ -8,7 +8,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: git fetch --unshallow --tags
-            
     - name: Install and run sematic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
