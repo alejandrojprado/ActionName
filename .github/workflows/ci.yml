@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-          git fetch --prune --unshallow --tags
+          git fetch --unshallow --tags
           echo exit code $?
           git tag --list
   
