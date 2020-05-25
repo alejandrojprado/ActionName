@@ -80,4 +80,5 @@ jobs:
       run: |
         docker login docker.pkg.github.com -u github.repository_owner --password ${{ github.token }}
         docker build . -t docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
-        docker push docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
+        export repo_name=${{ github.repository }}
+        docker push docker.pkg.github.com/"$(${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
