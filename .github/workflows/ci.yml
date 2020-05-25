@@ -60,12 +60,12 @@ jobs:
     - name: version tag
       id: version-tag
       run: |
-        if [ "${GITHUB_REF/refs\/tags\//}" = "" ]
+        if [ "${GITHUB_REF##*/}" = "" ]
         then
           echo no tag
           echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
         else
-          echo "${GITHUB_REF/refs\/tags\//}"
+          echo "${GITHUB_REF##*/}"
           echo "::set-output name=VERSION_TAG::'${GITHUB_REF/refs\/tags\//}'"
         fi
         
