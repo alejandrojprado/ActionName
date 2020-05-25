@@ -7,11 +7,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - name: prepare env
-      uses: actions/checkout@v2
-    - name: ls
-      run: ls -la
-
+    - uses: actions/checkout@v2
+    - run:  git fetch --prune --unshallow --tags
+  
     - name: create configuration files
       env:
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
