@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - SearchControllerTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>SearchControllerTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.mahisoft.kamino.mssearch.rest.html">com.mahisoft.kamino.mssearch.rest</a> &gt; SearchControllerTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">10</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">4.046s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Test combined search with repeating filters()</td>
+<td class="success">0.098s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test combined search()</td>
+<td class="success">0.101s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test exact search with multiple words case insensitive()</td>
+<td class="success">0.083s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test exact search with multiple words()</td>
+<td class="success">0.069s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test range search()</td>
+<td class="success">0.214s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test search contained with multiple words()</td>
+<td class="success">0.061s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test search contained()</td>
+<td class="success">3.106s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test search exact()</td>
+<td class="success">0.045s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test search fuzzy with multiple words()</td>
+<td class="success">0.135s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Test search fuzzy()</td>
+<td class="success">0.134s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>14:35:08.285 [Test worker] DEBUG org.testcontainers.utility.TestcontainersConfiguration - Testcontainers configuration overrides will be loaded from file:/home/ale/.testcontainers.properties
+14:35:08.368 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.EnvironmentAndSystemPropertyClientProviderStrategy from ~/.testcontainers.properties, will try it first
+14:35:09.425 [ducttape-0] DEBUG org.testcontainers.dockerclient.DockerClientProviderStrategy - Pinging docker daemon...
+14:35:09.523 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 
+14:35:12.105 [Test worker] INFO org.testcontainers.dockerclient.EnvironmentAndSystemPropertyClientProviderStrategy - Found docker client settings from environment
+14:35:12.105 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Found Docker environment with Environment variables, system properties and defaults. Resolved dockerHost=unix:///var/run/docker.sock
+14:35:12.106 [Test worker] DEBUG org.testcontainers.dockerclient.DockerClientProviderStrategy - Checking Docker OS type for Environment variables, system properties and defaults. Resolved dockerHost=unix:///var/run/docker.sock
+14:35:12.110 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 
+14:35:12.415 [Test worker] INFO org.testcontainers.DockerClientFactory - Docker host IP address is localhost
+14:35:12.418 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 
+14:35:12.430 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 
+14:35:12.460 [Test worker] INFO org.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 19.03.6
+  API Version: 1.40
+  Operating System: Linux Mint 19.3
+  Total Memory: 11865 MB
+14:35:12.461 [Test worker] DEBUG org.testcontainers.DockerClientFactory - Ryuk is enabled
+14:35:12.470 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: ListImagesCmdImpl[imageNameFilter=quay.io/testcontainers/ryuk:0.2.3,showAll=false,filters=com.github.dockerjava.core.util.FiltersBuilder@0]
+14:35:12.537 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: quay.io/testcontainers/ryuk:0.2.3 at registry: quay.io
+14:35:12.538 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /home/ale/.docker/config.json (exists) and commandPathPrefix: 
+14:35:12.558 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [quay.io] for dockerImageName [quay.io/testcontainers/ryuk:0.2.3]
+14:35:12.561 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - No matching Auth Configs - falling back to defaultAuthConfig [null]
+14:35:12.562 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+14:35:12.621 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@ca996c9[name=testcontainers-ryuk-179fd7b2-d95f-45d0-84df-c004badf07df,hostName=&lt;null&gt;,domainName=&lt;null&gt;,user=&lt;null&gt;,attachStdin=&lt;null&gt;,attachStdout=&lt;null&gt;,attachStderr=&lt;null&gt;,portSpecs=&lt;null&gt;,tty=&lt;null&gt;,stdinOpen=&lt;null&gt;,stdInOnce=&lt;null&gt;,env=&lt;null&gt;,cmd=&lt;null&gt;,healthcheck=&lt;null&gt;,argsEscaped=&lt;null&gt;,entrypoint=&lt;null&gt;,image=quay.io/testcontainers/ryuk:0.2.3,volumes=com.github.dockerjava.api.model.Volumes@5fb188e0,workingDir=&lt;null&gt;,macAddress=&lt;null&gt;,onBuild=&lt;null&gt;,networkDisabled=&lt;null&gt;,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@2f41d4fd,stopSignal=&lt;null&gt;,stopTimeout=&lt;null&gt;,hostConfig=HostConfig(binds=[//var/run/docker.sock:/var/run/docker.sock:rw], blkioWeight=null, blkioWeightDevice=null, blkioDeviceReadBps=null, blkioDeviceWriteBps=null, blkioDeviceReadIOps=null, blkioDeviceWriteIOps=null, memorySwappiness=null, nanoCPUs=null, capAdd=null, capDrop=null, containerIDFile=null, cpuPeriod=null, cpuRealtimePeriod=null, cpuRealtimeRuntime=null, cpuShares=null, cpuQuota=null, cpusetCpus=null, cpusetMems=null, devices=null, deviceCgroupRules=null, deviceRequests=null, diskQuota=null, dns=null, dnsOptions=null, dnsSearch=null, extraHosts=null, groupAdd=null, ipcMode=null, cgroup=null, links=[], logConfig=com.github.dockerjava.api.model.LogConfig@6984b75f, lxcConf=null, memory=null, memorySwap=null, memoryReservation=null, kernelMemory=null, networkMode=null, oomKillDisable=null, init=null, autoRemove=true, oomScoreAdj=null, portBindings=null, privileged=false, publishAllPorts=true, readonlyRootfs=null, restartPolicy=null, ulimits=null, cpuCount=null, cpuPercent=null, ioMaximumIOps=null, ioMaximumBandwidth=null, volumesFrom=null, mounts=null, pidMode=null, isolation=null, securityOpts=null, storageOpt=null, cgroupParent=null, volumeDriver=null, shmSize=null, pidsLimit=null, runtime=null, tmpFs=null, utSMode=null, usernsMode=null, sysctls=null, consoleSize=null),labels={org.testcontainers=true},shell=&lt;null&gt;,networkingConfig=&lt;null&gt;,ipv4Address=&lt;null&gt;,ipv6Address=&lt;null&gt;,aliases=&lt;null&gt;,authConfig=&lt;null&gt;]
+14:35:12.852 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 740247f70ae886d6229d28d799d67ece1bce92eca23a29a9356f0c0dde56e254
+14:35:13.444 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 740247f70ae886d6229d28d799d67ece1bce92eca23a29a9356f0c0dde56e254,false
+14:35:13.445 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: com.github.dockerjava.okhttp.OkHttpWebTarget@42ca246b
+14:35:13.599 [testcontainers-ryuk] DEBUG org.testcontainers.utility.ResourceReaper - Sending 'label=org.testcontainers%3Dtrue&amp;label=org.testcontainers.sessionId%3D179fd7b2-d95f-45d0-84df-c004badf07df' to Ryuk
+14:35:13.600 [testcontainers-ryuk] DEBUG org.testcontainers.utility.ResourceReaper - Received 'ACK' from Ryuk
+14:35:13.600 [Test worker] INFO org.testcontainers.DockerClientFactory - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+14:35:13.601 [Test worker] DEBUG org.testcontainers.DockerClientFactory - Checks are enabled
+14:35:13.601 [Test worker] INFO org.testcontainers.DockerClientFactory - Checking the system...
+14:35:13.602 [Test worker] INFO org.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+14:35:13.605 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 740247f70ae886d6229d28d799d67ece1bce92eca23a29a9356f0c0dde56e254,&lt;null&gt;,true,&lt;null&gt;,&lt;null&gt;,&lt;null&gt;,&lt;null&gt;,{df,-P},&lt;null&gt;,&lt;null&gt;
+14:35:13.889 [tc-okhttp-stream-621084383] DEBUG com.github.dockerjava.core.command.ExecStartResultCallback - STDOUT: Filesystem           1024-blocks    Used Available Capacity Mounted on
+14:35:13.890 [tc-okhttp-stream-621084383] DEBUG com.github.dockerjava.core.command.ExecStartResultCallback - STDOUT: overlay              229192044 132328672  85151372  61% /
+tmpfs                    65536         0     65536   0% /dev
+tmpfs                  6074908         0   6074908   0% /sys/fs/cgroup
+shm                      65536         0     65536   0% /dev/shm
+/dev/sda2            229192044 132328672  85151372  61% /etc/resolv.conf
+/dev/sda2            229192044 132328672  85151372  61% /etc/hostname
+/dev/sda2            229192044 132328672  85151372  61% /etc/hosts
+tmpfs                  1214984      1664   1213320   0% /run/docker.sock
+tmpfs                  6074908         0   6074908   0% /proc/asound
+tmpfs                  6074908         0   6074908   0% /proc/acpi
+tmpfs                    65536         0     65536   0% /proc/kcore
+tmpfs                    65536         0     65536   0% /proc/keys
+tmpfs                    65536         0     65536   0% /proc/timer_list
+tmpfs                    65536         0     65536   0% /proc/sched_debug
+tmpfs                  6074908         0   6074908   0% /proc/scsi
+tmpfs
+14:35:13.892 [tc-okhttp-stream-621084383] DEBUG com.github.dockerjava.core.command.ExecStartResultCallback - STDOUT: 6074908         0   6074908   0% /sys/firmware
+14:35:13.917 [Test worker] INFO org.testcontainers.DockerClientFactory - ✔︎ Docker environment should have more than 2GB free disk space
+14:35:13.918 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: ListImagesCmdImpl[imageNameFilter=&lt;null&gt;,showAll=false,filters=com.github.dockerjava.core.util.FiltersBuilder@0]
+14:35:13.952 [Test worker] DEBUG org.testcontainers.images.AbstractImagePullPolicy - Using locally available and not pulling image: elasticsearch:7.6.2
+14:35:13.952 [Test worker] INFO ?? [elasticsearch:7.6.2] - Starting an elasticsearch container using [elasticsearch:7.6.2]
+14:35:14.032 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+14:35:14.069 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+14:35:14.152 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+14:35:14.232 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]: class path resource [com/mahisoft/kamino/mssearch/rest/SearchControllerTests-context.xml] does not exist
+14:35:14.234 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]: class path resource [com/mahisoft/kamino/mssearch/rest/SearchControllerTestsContext.groovy] does not exist
+14:35:14.235 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+14:35:14.237 [Test worker] DEBUG org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Ignoring class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests$Companion]; it must be static, non-private, non-final, and annotated with @Configuration to be considered a default configuration class.
+14:35:14.243 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]: SearchControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:35:14.375 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]
+14:35:14.539 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/ale/Projects/CRC/action/ms-search-service-ng/build/classes/kotlin/main/com/mahisoft/kamino/mssearch/MsSearchApplication.class]
+14:35:14.545 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.mahisoft.kamino.mssearch.MsSearchApplication for test class com.mahisoft.kamino.mssearch.rest.SearchControllerTests
+14:35:14.789 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.mahisoft.kamino.mssearch.rest.SearchControllerTests]: using defaults.
+14:35:14.790 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+14:35:14.823 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@591efadc, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2aa0c7a4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@68e135c0, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@77771308, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5991cf20, org.springframework.test.context.transaction.TransactionalTestExecutionListener@7520be51, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@148eca00, org.springframework.test.context.event.EventPublishingTestExecutionListener@5bae64ca, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@c914850, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7c33bda5, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1e0fb6e9, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@36af09d6, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@307a149b]
+14:35:14.835 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@4016f0c0 testClass = SearchControllerTests, testInstance = com.mahisoft.kamino.mssearch.rest.SearchControllerTests@60594b2a, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5784e183 testClass = SearchControllerTests, locations = '{}', classes = '{class com.mahisoft.kamino.mssearch.MsSearchApplication}', contextInitializerClasses = '[class com.mahisoft.kamino.mssearch.BaseTest$Companion$Initializer]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@70415070, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3ae213f3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@2bada2f0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@30514b07], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; false]]].
+14:35:14.886 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.2.4.RELEASE)
+
+2020-05-25 14:35:16.712  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Creating container for image: percona:latest
+2020-05-25 14:35:17.109  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Starting container with ID: 1eddffdaff7c801201a65783a3188eaa5bbf2154ff4556d68def7e46e40f4b29
+2020-05-25 14:35:17.894  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Container percona:latest is starting: 1eddffdaff7c801201a65783a3188eaa5bbf2154ff4556d68def7e46e40f4b29
+2020-05-25 14:35:17.905  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Waiting for database connection to become available at jdbc:mysql://localhost:32769/test using query 'SELECT 1'
+2020-05-25 14:35:32.203  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Container is started (JDBC URL: jdbc:mysql://localhost:32769/test)
+2020-05-25 14:35:32.204  INFO 11637 --- [    Test worker] ?? [percona:latest]                      : Container percona:latest started in PT15.497033S
+2020-05-25 14:35:32.215  INFO 11637 --- [    Test worker] ?? [elasticsearch:7.6.2]                 : Creating container for image: elasticsearch:7.6.2
+2020-05-25 14:35:32.338  INFO 11637 --- [    Test worker] ?? [elasticsearch:7.6.2]                 : Starting container with ID: 95f9cc6e0b44c9156c127c6267677d4492d78ed275be4739017c842726f50dd1
+2020-05-25 14:35:33.008  INFO 11637 --- [    Test worker] ?? [elasticsearch:7.6.2]                 : Container elasticsearch:7.6.2 is starting: 95f9cc6e0b44c9156c127c6267677d4492d78ed275be4739017c842726f50dd1
+2020-05-25 14:35:33.017  INFO 11637 --- [    Test worker] o.t.c.wait.strategy.HttpWaitStrategy     : /awesome_knuth: Waiting for 120 seconds for URL: http://localhost:9200/
+2020-05-25 14:35:50.279  INFO 11637 --- [    Test worker] ?? [elasticsearch:7.6.2]                 : Container elasticsearch:7.6.2 started in PT18.063352S
+2020-05-25 14:35:50.290  INFO 11637 --- [    Test worker] c.m.k.m.rest.SearchControllerTests       : Starting SearchControllerTests on Asus with PID 11637 (started by ale in /home/ale/Projects/CRC/action/ms-search-service-ng)
+2020-05-25 14:35:50.292  INFO 11637 --- [    Test worker] c.m.k.m.rest.SearchControllerTests       : The following profiles are active: build
+2020-05-25 14:35:52.848  INFO 11637 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-05-25 14:35:52.997  INFO 11637 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 112ms. Found 3 JPA repository interfaces.
+2020-05-25 14:35:53.000  INFO 11637 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-05-25 14:35:53.027  INFO 11637 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26ms. Found 3 JPA repository interfaces.
+2020-05-25 14:35:55.070  INFO 11637 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-05-25 14:35:55.730  INFO 11637 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2020-05-25 14:35:55.759  INFO 11637 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-25 14:35:55.760  INFO 11637 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-05-25 14:35:56.095  INFO 11637 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2020-05-25 14:35:56.095  INFO 11637 --- [    Test worker] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5680 ms
+2020-05-25 14:35:57.744  INFO 11637 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2020-05-25 14:35:57.765  INFO 11637 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-05-25 14:35:57.782  WARN 11637 --- [    Test worker] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2020-05-25 14:35:57.954  INFO 11637 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-05-25 14:35:57.964  INFO 11637 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:32769/test (MySQL 5.7)
+2020-05-25 14:35:58.105  INFO 11637 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.028s)
+2020-05-25 14:35:58.124  INFO 11637 --- [    Test worker] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `test`.`flyway_schema_history`
+2020-05-25 14:35:58.207  INFO 11637 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema `test`: &lt;&lt; Empty Schema &gt;&gt;
+2020-05-25 14:35:58.213  INFO 11637 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Migrating schema `test` to version 1.0.0.001 - initial db structure
+2020-05-25 14:35:58.380  INFO 11637 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Migrating schema `test` to version 1.0.0.002 - alter column table
+2020-05-25 14:35:58.504  INFO 11637 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema `test` (execution time 00:00.382s)
+2020-05-25 14:35:58.509  INFO 11637 --- [    Test worker] o.f.c.i.c.SqlScriptCallbackFactory       : Executing SQL callback: afterMigrate
+2020-05-25 14:35:58.804  INFO 11637 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: crc]
+2020-05-25 14:35:59.053  INFO 11637 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.10.Final}
+2020-05-25 14:35:59.467  INFO 11637 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-05-25 14:35:59.921 ERROR 11637 --- [    Test worker] com.zaxxer.hikari.HikariConfig           : HikariPool-2 - dataSource or dataSourceClassName or jdbcUrl is required.
+2020-05-25 14:35:59.921  WARN 11637 --- [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata : dataSource or dataSourceClassName or jdbcUrl is required.
+2020-05-25 14:35:59.961  INFO 11637 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-05-25 14:36:01.263  INFO 11637 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-05-25 14:36:01.278  INFO 11637 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'crc'
+2020-05-25 14:36:01.310  INFO 11637 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: search]
+2020-05-25 14:36:01.328  INFO 11637 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-05-25 14:36:01.494  INFO 11637 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-05-25 14:36:01.495  INFO 11637 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'search'
+2020-05-25 14:36:03.795  WARN 11637 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-05-25 14:36:04.342  INFO 11637 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-25 14:36:05.074  INFO 11637 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-05-25 14:36:05.402  INFO 11637 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 37505 (http) with context path '/api'
+2020-05-25 14:36:05.405  INFO 11637 --- [    Test worker] c.m.k.m.rest.SearchControllerTests       : Started SearchControllerTests in 49.688 seconds (JVM running for 59.34)
+2020-05-25 14:36:07.529  WARN 11637 --- [/O dispatcher 1] org.elasticsearch.client.RestClient      : request [PUT http://127.0.0.1:9200/messages?master_timeout=30s&amp;include_type_name=false&amp;timeout=30s] returned 1 warnings: [299 Elasticsearch-7.6.2-ef48eb35cf30adf4db14086e8aabd07ef6fb113f &quot;[types removal] Using include_type_name in create index requests is deprecated. The parameter will be removed in the next major version.&quot;]
+2020-05-25 14:36:10.342  INFO 11637 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-25 14:36:10.343  INFO 11637 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-25 14:36:10.387  INFO 11637 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 36 ms
+2020-05-25 14:36:10.630  INFO 11637 --- [o-auto-1-exec-1] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message.contained&quot; : {
+            &quot;query&quot; : &quot;fox&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.188  INFO 11637 --- [o-auto-1-exec-3] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;house&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.235  INFO 11637 --- [o-auto-1-exec-5] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;housa&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;fuzziness&quot; : &quot;2&quot;,
+            &quot;prefix_length&quot; : 1,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.408  INFO 11637 --- [o-auto-1-exec-6] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;range&quot; : {
+          &quot;image_date&quot; : {
+            &quot;from&quot; : &quot;2020-03-01T00:00:00.000Z&quot;,
+            &quot;to&quot; : &quot;2020-03-30T00:00:00.000Z&quot;,
+            &quot;include_lower&quot; : true,
+            &quot;include_upper&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.543  INFO 11637 --- [o-auto-1-exec-8] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;range&quot; : {
+          &quot;image_date&quot; : {
+            &quot;from&quot; : &quot;2020-03-01T00:00:00.000Z&quot;,
+            &quot;to&quot; : &quot;2020-03-30T00:00:00.000Z&quot;,
+            &quot;include_lower&quot; : true,
+            &quot;include_upper&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.596  INFO 11637 --- [o-auto-1-exec-9] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;burger&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      },
+      {
+        &quot;match&quot; : {
+          &quot;user_name&quot; : {
+            &quot;query&quot; : &quot;eperez88&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.697  INFO 11637 --- [-auto-1-exec-10] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;silver back gorilla&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.786  INFO 11637 --- [o-auto-1-exec-2] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message.contained&quot; : {
+            &quot;query&quot; : &quot;cool test&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.868  INFO 11637 --- [o-auto-1-exec-3] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;silver back gorilla&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:11.932  INFO 11637 --- [o-auto-1-exec-4] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;blue&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;prefix_length&quot; : 0,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      },
+      {
+        &quot;bool&quot; : {
+          &quot;should&quot; : [
+            {
+              &quot;match&quot; : {
+                &quot;network&quot; : {
+                  &quot;query&quot; : &quot;irc&quot;,
+                  &quot;operator&quot; : &quot;AND&quot;,
+                  &quot;prefix_length&quot; : 0,
+                  &quot;max_expansions&quot; : 50,
+                  &quot;fuzzy_transpositions&quot; : true,
+                  &quot;lenient&quot; : false,
+                  &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+                  &quot;auto_generate_synonyms_phrase_query&quot; : true,
+                  &quot;boost&quot; : 1.0
+                }
+              }
+            },
+            {
+              &quot;match&quot; : {
+                &quot;network&quot; : {
+                  &quot;query&quot; : &quot;telegram&quot;,
+                  &quot;operator&quot; : &quot;AND&quot;,
+                  &quot;prefix_length&quot; : 0,
+                  &quot;max_expansions&quot; : 50,
+                  &quot;fuzzy_transpositions&quot; : true,
+                  &quot;lenient&quot; : false,
+                  &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+                  &quot;auto_generate_synonyms_phrase_query&quot; : true,
+                  &quot;boost&quot; : 1.0
+                }
+              }
+            }
+          ],
+          &quot;adjust_pure_negative&quot; : true,
+          &quot;boost&quot; : 1.0
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+2020-05-25 14:36:12.030  INFO 11637 --- [o-auto-1-exec-5] c.m.k.mssearch.service.SearchService     : Query: {
+  &quot;bool&quot; : {
+    &quot;must&quot; : [
+      {
+        &quot;match&quot; : {
+          &quot;message&quot; : {
+            &quot;query&quot; : &quot;scottyy pilgrimii&quot;,
+            &quot;operator&quot; : &quot;AND&quot;,
+            &quot;fuzziness&quot; : &quot;2&quot;,
+            &quot;prefix_length&quot; : 1,
+            &quot;max_expansions&quot; : 50,
+            &quot;fuzzy_transpositions&quot; : true,
+            &quot;lenient&quot; : false,
+            &quot;zero_terms_query&quot; : &quot;NONE&quot;,
+            &quot;auto_generate_synonyms_phrase_query&quot; : true,
+            &quot;boost&quot; : 1.0
+          }
+        }
+      }
+    ],
+    &quot;adjust_pure_negative&quot; : true,
+    &quot;boost&quot; : 1.0
+  }
+}
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at May 25, 2020, 2:36:18 PM</p>
+</div>
+</div>
+</body>
+</html>

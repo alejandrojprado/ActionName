@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchDbConfig.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.config</a> &gt; <span class="el_source">SearchDbConfig.kt</span></div><h1>SearchDbConfig.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.config
+
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.autoconfigure.flyway.FlywayDataSource
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.jdbc.DataSourceBuilder
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.orm.jpa.JpaTransactionManager
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
+import org.springframework.transaction.PlatformTransactionManager
+import org.springframework.transaction.annotation.EnableTransactionManagement
+import javax.persistence.EntityManagerFactory
+import javax.sql.DataSource
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(entityManagerFactoryRef = &quot;entityManagerFactory&quot;,
+        basePackages = [&quot;com.mahisoft.kamino.mssearch.service.search.repository&quot;])
+<span class="fc" id="L23">class SearchDbConfig {</span>
+    @FlywayDataSource
+    @Primary
+    @Bean(name = [&quot;dataSource&quot;])
+    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+    fun dataSource(): DataSource {
+<span class="fc" id="L29">        return DataSourceBuilder.create().build()</span>
+    }
+
+    @Primary
+    @Bean(name = [&quot;entityManagerFactory&quot;])
+    fun entityManagerFactory(
+        builder: EntityManagerFactoryBuilder,
+        @Qualifier(&quot;dataSource&quot;) dataSource: DataSource?
+    ): LocalContainerEntityManagerFactoryBean {
+<span class="fc" id="L38">        val em = builder</span>
+<span class="fc" id="L39">                .dataSource(dataSource)</span>
+<span class="fc" id="L40">                .packages(&quot;com.mahisoft.kamino.mssearch.service.search.domain&quot;)</span>
+<span class="fc" id="L41">                .persistenceUnit(&quot;search&quot;)</span>
+<span class="fc" id="L42">                .build()</span>
+<span class="fc" id="L43">        em.jpaPropertyMap = mapOf(&quot;hibernate.dialect&quot; to &quot;org.hibernate.dialect.MySQLDialect&quot;)</span>
+<span class="fc" id="L44">        return em</span>
+    }
+
+    @Primary
+    @Bean(name = [&quot;transactionManager&quot;])
+    fun transactionManager(
+        @Qualifier(&quot;entityManagerFactory&quot;) entityManagerFactory: EntityManagerFactory
+    ): PlatformTransactionManager {
+<span class="fc" id="L52">        return JpaTransactionManager(entityManagerFactory)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

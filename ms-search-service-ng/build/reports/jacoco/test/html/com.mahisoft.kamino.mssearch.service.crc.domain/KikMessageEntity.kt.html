@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KikMessageEntity.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service.crc.domain</a> &gt; <span class="el_source">KikMessageEntity.kt</span></div><h1>KikMessageEntity.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service.crc.domain
+
+import org.hibernate.annotations.Type
+import java.time.Instant
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
+
+@Entity
+@Table(name = &quot;KikMessages&quot;)
+<span class="fc" id="L14">data class KikMessageEntity(</span>
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;RowId&quot;)
+<span class="nc" id="L18">    val rowId: Long? = null,</span>
+
+    @Column(name = &quot;uuid&quot;)
+<span class="nc" id="L21">    val uuid: String? = null,</span>
+
+    @Column(name = &quot;license_id&quot;)
+<span class="nc" id="L24">    val licenseId: String? = null,</span>
+
+    @Column(name = &quot;sender_id&quot;)
+<span class="nc" id="L27">    var senderId: String? = null,</span>
+
+    @Column(name = &quot;group_id&quot;)
+<span class="nc" id="L30">    var groupId: String? = null,</span>
+
+    @Column(name = &quot;message&quot;)
+<span class="nc" id="L33">    var message: String? = null,</span>
+
+    @Column(name = &quot;sysmessage&quot;)
+<span class="nc" id="L36">    var sysMessage: String? = null,</span>
+
+    @Column(name = &quot;statmessage&quot;)
+<span class="nc" id="L39">    var statMessage: String? = null,</span>
+
+    @Column(name = &quot;statrecipient&quot;)
+<span class="nc" id="L42">    var statrecipient: String? = null,</span>
+
+    @Column(name = &quot;is_uc&quot;, columnDefinition = &quot;TINYINT&quot;)
+    @Type(type = &quot;org.hibernate.type.NumericBooleanType&quot;)
+<span class="nc" id="L46">    var isUc: Boolean? = null,</span>
+
+    @Column(name = &quot;date_added&quot;)
+<span class="nc" id="L49">    var dateAdded: Instant? = null,</span>
+
+    @Column(name = &quot;message_date&quot;)
+<span class="nc" id="L52">    var messageDate: Instant? = null</span>
+)
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

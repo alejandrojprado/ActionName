@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageDocument.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service.search.domain</a> &gt; <span class="el_source">MessageDocument.kt</span></div><h1>MessageDocument.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service.search.domain
+
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
+import org.elasticsearch.common.geo.GeoPoint
+import org.springframework.data.annotation.Id
+import java.time.Instant
+
+/**
+ * Main document for index messages
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+<span class="fc" id="L14">data class MessageDocument(</span>
+    @Id
+    @JsonProperty(&quot;id&quot;)
+<span class="fc" id="L17">    val id: Long? = null,</span>
+    @JsonProperty(&quot;uuid&quot;)
+<span class="fc" id="L19">    val uuid: String? = null,</span>
+    @JsonProperty(&quot;group_id&quot;)
+<span class="fc" id="L21">    val groupId: String? = null,</span>
+    @JsonProperty(&quot;group_name&quot;)
+<span class="fc" id="L23">    val groupName: String? = null,</span>
+    @JsonProperty(&quot;message&quot;)
+<span class="fc" id="L25">    val message: String? = null,</span>
+    @JsonProperty(&quot;giga_flag&quot;)
+<span class="fc" id="L27">    val gigaFlag: String? = null,</span>
+    @JsonProperty(&quot;locate_city&quot;)
+<span class="fc" id="L29">    val locateCity: String? = null,</span>
+    @JsonProperty(&quot;locate_country&quot;)
+<span class="fc" id="L31">    val locateCountry: String? = null,</span>
+    @JsonProperty(&quot;locate_county&quot;)
+<span class="fc" id="L33">    val locateCounty: String? = null,</span>
+    @JsonProperty(&quot;LocateLat&quot;)
+<span class="fc" id="L35">    val locateLat: Float? = null,</span>
+    @JsonProperty(&quot;LocateLon&quot;)
+<span class="fc" id="L37">    val locateLon: Float? = null,</span>
+    @JsonProperty(&quot;locate_region&quot;)
+<span class="fc" id="L39">    val locateRegion: String? = null,</span>
+    @JsonProperty(&quot;RowId&quot;)
+<span class="fc" id="L41">    val rowId: Long? = null,</span>
+    @JsonProperty(&quot;web_flag&quot;)
+<span class="fc" id="L43">    val webFlag: String? = null,</span>
+    @JsonProperty(&quot;chat_type&quot;)
+<span class="fc" id="L45">    val chatType: String? = null,</span>
+    @JsonProperty(&quot;date_added&quot;)
+<span class="fc" id="L47">    val dateAdded: String? = null,</span>
+    @JsonProperty(&quot;document_filename&quot;)
+<span class="fc" id="L49">    val documentFileName: String? = null,</span>
+    @JsonProperty(&quot;first_name&quot;)
+<span class="fc" id="L51">    val firstName: String? = null,</span>
+    @JsonProperty(&quot;fqdn&quot;)
+<span class="fc" id="L53">    val fqdn: String? = null,</span>
+    @JsonProperty(&quot;document_mimetype&quot;)
+<span class="fc" id="L55">    val documentMimeType: String? = null,</span>
+    @JsonProperty(&quot;height&quot;)
+<span class="fc" id="L57">    val height: Long? = null,</span>
+    @JsonProperty(&quot;ipaddress&quot;)
+<span class="fc" id="L59">    val ipAddress: String? = null,</span>
+    @JsonProperty(&quot;irchannel&quot;)
+<span class="fc" id="L61">    val ircChannel: String? = null,</span>
+    @JsonProperty(&quot;ircport&quot;)
+<span class="fc" id="L63">    val ircPort: Long? = null,</span>
+    @JsonProperty(&quot;ircserver&quot;)
+<span class="fc" id="L65">    val ircServer: String? = null,</span>
+    @JsonProperty(&quot;is_bot&quot;)
+<span class="fc" id="L67">    val isBot: Boolean? = null,</span>
+    @JsonProperty(&quot;is_scam&quot;)
+<span class="fc" id="L69">    val isScam: Boolean? = null,</span>
+    @JsonProperty(&quot;is_uc&quot;)
+<span class="fc" id="L71">    val isUc: Boolean? = null,</span>
+    @JsonProperty(&quot;last_name&quot;)
+<span class="fc" id="L73">    val lastName: String? = null,</span>
+    @JsonProperty(&quot;license_id&quot;)
+<span class="fc" id="L75">    val licenseId: String? = null,</span>
+    @JsonProperty(&quot;logged_date&quot;)
+<span class="fc" id="L77">    val loggedDate: Instant? = null,</span>
+    @JsonProperty(&quot;message_date&quot;)
+    @JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+<span class="fc" id="L80">    val messageDate: String? = null,</span>
+    @JsonProperty(&quot;image_date&quot;)
+<span class="fc" id="L82">    val imageDate: Instant? = null,</span>
+    @JsonProperty(&quot;image_id&quot;)
+<span class="fc" id="L84">    val imageId: String? = null,</span>
+    @JsonProperty(&quot;message_id&quot;)
+<span class="fc" id="L86">    val messageId: Long? = null,</span>
+    @JsonProperty(&quot;online_last&quot;)
+<span class="fc" id="L88">    val onlineLast: String? = null,</span>
+    @JsonProperty(&quot;phone&quot;)
+<span class="fc" id="L90">    val phone: String? = null,</span>
+    @JsonProperty(&quot;sender_id&quot;)
+<span class="fc" id="L92">    val senderId: String? = null,</span>
+    @JsonProperty(&quot;sn&quot;)
+<span class="fc" id="L94">    val sn: String? = null,</span>
+    @JsonProperty(&quot;statmessage&quot;)
+<span class="fc" id="L96">    val statMessage: String? = null,</span>
+    @JsonProperty(&quot;statrecipient&quot;)
+<span class="fc" id="L98">    val statRecipient: String? = null,</span>
+    @JsonProperty(&quot;sysmessage&quot;)
+<span class="fc" id="L100">    val sysMessage: String? = null,</span>
+    @JsonProperty(&quot;type&quot;)
+<span class="fc" id="L102">    val type: String? = null,</span>
+    @JsonProperty(&quot;user_name&quot;)
+<span class="fc" id="L104">    val userName: String? = null,</span>
+    @JsonProperty(&quot;width&quot;)
+<span class="fc" id="L106">    val width: Long? = null,</span>
+    @JsonProperty(&quot;network&quot;)
+<span class="fc" id="L108">    val network: String? = null,</span>
+    @JsonProperty(&quot;location&quot;)
+<span class="fc" id="L110">    val location: GeoPoint? = null,</span>
+    @JsonProperty(&quot;online_last_indicator&quot;)
+<span class="fc" id="L112">    val onlineLastIndicator: String? = null,</span>
+    @JsonProperty(&quot;fdqn&quot;)
+<span class="fc" id="L114">    val fdqn: String? = null,</span>
+    @JsonProperty(&quot;channel&quot;)
+<span class="fc" id="L116">    val channel: String? = null</span>
+)
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

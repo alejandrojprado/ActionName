@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExceptionHandlerAdvise.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.config</a> &gt; <span class="el_source">ExceptionHandlerAdvise.kt</span></div><h1>ExceptionHandlerAdvise.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.config
+
+import com.mahisoft.kamino.commons.exception.ApiError
+import com.mahisoft.kamino.mssearch.exception.ExistentRelationException
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.context.request.WebRequest
+import javax.persistence.EntityNotFoundException
+
+@ControllerAdvice
+<span class="fc" id="L14">class ExceptionHandlerAdvise {</span>
+
+    @ExceptionHandler(EntityNotFoundException::class)
+    fun handlerColumnNotFoundException(ex: EntityNotFoundException, request: WebRequest): ResponseEntity&lt;ApiError&gt; {
+<span class="fc" id="L18">        return ResponseEntity(</span>
+<span class="fc" id="L19">                ApiError.createApiError(</span>
+<span class="fc" id="L20">                        ex,</span>
+<span class="fc" id="L21">                        HttpStatus.NOT_FOUND,</span>
+<span class="fc" id="L22">                        HttpStatus.NOT_FOUND.reasonPhrase</span>
+                ),
+<span class="fc" id="L24">                HttpStatus.NOT_FOUND</span>
+        )
+    }
+
+    @ExceptionHandler(ExistentRelationException::class)
+    fun handlerExistentRelationException(ex: ExistentRelationException, request: WebRequest): ResponseEntity&lt;ApiError&gt; {
+<span class="fc" id="L30">        return ResponseEntity(</span>
+<span class="fc" id="L31">                ApiError.createApiError(</span>
+<span class="fc" id="L32">                        ex,</span>
+<span class="fc" id="L33">                        HttpStatus.CONFLICT,</span>
+<span class="fc" id="L34">                        HttpStatus.CONFLICT.reasonPhrase</span>
+                ),
+<span class="fc" id="L36">                HttpStatus.CONFLICT</span>
+        )
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleMissingRequestBody(ex: HttpMessageNotReadableException): ResponseEntity&lt;*&gt;? {
+<span class="nc" id="L42">        return ResponseEntity(</span>
+<span class="nc" id="L43">                ApiError.createApiError(</span>
+<span class="nc" id="L44">                        ex,</span>
+<span class="nc" id="L45">                        HttpStatus.BAD_REQUEST,</span>
+<span class="nc" id="L46">                        HttpStatus.BAD_REQUEST.reasonPhrase</span>
+                ),
+<span class="nc" id="L48">                HttpStatus.BAD_REQUEST</span>
+        )
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CRCService.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-search-service-ng</a> &gt; <a href="index.source.html" class="el_package">com.mahisoft.kamino.mssearch.service</a> &gt; <span class="el_source">CRCService.kt</span></div><h1>CRCService.kt</h1><pre class="source lang-java linenums">package com.mahisoft.kamino.mssearch.service
+
+import com.mahisoft.kamino.mssearch.service.crc.domain.IRCMessageEntity
+import com.mahisoft.kamino.mssearch.service.crc.domain.KikMessageEntity
+import com.mahisoft.kamino.mssearch.service.crc.domain.TelegramMessageEntity
+import com.mahisoft.kamino.mssearch.service.crc.repository.IRCMessageRepository
+import com.mahisoft.kamino.mssearch.service.crc.repository.KIKMessageRepository
+import com.mahisoft.kamino.mssearch.service.crc.repository.TelegramMessageRepository
+import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.stereotype.Service
+
+/**
+ * Service to perform queries over elastic search index
+ */
+@Service
+<span class="fc" id="L18">class CRCService(</span>
+<span class="nc" id="L19">    val telegramMessageRepository: TelegramMessageRepository,</span>
+<span class="nc" id="L20">    val kikMessageRepository: KIKMessageRepository,</span>
+<span class="nc" id="L21">    val ircMessageRepository: IRCMessageRepository</span>
+) {
+
+    companion object {
+        const val SINGLE_VALUE = 1
+
+        @Suppress(&quot;JAVA_CLASS_ON_COMPANION&quot;)
+<span class="fc" id="L28">        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)</span>
+    }
+
+    /**
+     * Called to get all the messages from the telegram table
+     *
+     * @param page page number
+     * @param size the amount of results to return
+     *
+     * @return a Page object with the telegram messages
+     */
+    fun getTelegramMessages(page: Int, size: Int): Page&lt;TelegramMessageEntity&gt; {
+<span class="nc" id="L40">        return telegramMessageRepository.findAll(PageRequest.of(page, size))</span>
+    }
+
+    /**
+     * Called to get all the messages from the KIK table
+     *
+     * @param page page number
+     * @param size the amount of results to return
+     *
+     * @return a Page object with the KIK messages
+     */
+    fun getKIKMessages(page: Int, size: Int): Page&lt;KikMessageEntity&gt; {
+<span class="nc" id="L52">        return kikMessageRepository.findAll(PageRequest.of(page, size))</span>
+    }
+
+    /**
+     * Called to get all the messages from the IRC table
+     *
+     * @param page page number
+     * @param size the amount of results to return
+     *
+     * @return a Page object with the IRC messages
+     */
+    fun getIRCMessages(page: Int, size: Int): Page&lt;IRCMessageEntity&gt; {
+<span class="nc" id="L64">        return ircMessageRepository.findAll(PageRequest.of(page, size))</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

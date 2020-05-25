@@ -1,0 +1,368 @@
+{
+  "properties": {
+    "uuid": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "license_id": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "type": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "message_id": {
+      "type": "long"
+    },
+    "chat_type": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "group_id": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "group_name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "sender_id": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "user_name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "first_name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "last_name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "phone": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "message": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "width": {
+      "type": "long"
+    },
+    "height": {
+      "type": "long"
+    },
+    "image_date": {
+      "type": "date"
+    },
+    "image_id": {
+      "type": "keyword",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "location": {
+      "type": "geo_point"
+    },
+    "document_filename": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "message_date": {
+      "type": "date"
+    },
+    "online_last": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "online_last_indicator": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "logged_date": {
+      "type": "date"
+    },
+    "is_bot": {
+      "type": "boolean"
+    },
+    "is_scam": {
+      "type": "boolean"
+    },
+    "GigaFlag": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "sysmessage": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "statmessage": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "statrecipient": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "is_uc": {
+      "type": "boolean"
+    },
+    "fdqn": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "ipaddress": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "locate_country": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "locate_region": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "locate_city": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "locate_county": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    },
+    "giga_flag": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "web_flag": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "ircserver": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "ircport": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        }
+      }
+    },
+    "channel": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 20
+        },
+        "contained": {
+          "type": "text",
+          "analyzer": "ngram_analyzer",
+          "search_analyzer": "standard"
+        }
+      }
+    }
+  }
+}
