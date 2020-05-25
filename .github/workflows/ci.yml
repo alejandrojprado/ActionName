@@ -51,14 +51,14 @@ jobs:
                   ["@semantic-release/exec", { "publish" : "--no-ci -t ${version}" }]
                 ]
               }' >> .releaserc
-        sudo npm install -g --save-dev semantic-release
-        sudo npm -g install @semantic-release/git@8.0.0 @semantic-release/github @semantic-release/exec
+        #sudo npm install -g --save-dev semantic-release
+        #sudo npm -g install @semantic-release/git@8.0.0 @semantic-release/github @semantic-release/exec
         semantic-release --branches master --repository-url ${{ github.repository }}
         
     - name: version tag
       id: version-tag
       run: |
-        if [ "$(git discribe --tag)" = "" ]
+        if [ "$(git describe --tag)" = "" ]
         then
           echo no tag
           echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
