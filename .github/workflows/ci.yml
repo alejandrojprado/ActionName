@@ -47,7 +47,7 @@ jobs:
                 "plugins":[
                   "@semantic-release/commit-analyzer",
                   "@semantic-release/release-notes-generator",
-                  ["@semantic-release/exec", { "publish" : "--no-ci -t \${version}" }]
+                  ["@semantic-release/exec", { "publish" : "--no-ci -t '${version}'" }]
                 ]
               }' >> .releaserc
         sudo npm install -g --save-dev semantic-release
