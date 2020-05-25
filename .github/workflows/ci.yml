@@ -39,12 +39,6 @@ jobs:
             snapshotUploadUrl=https://nexus.mahisoft.com/repository/maven-snapshots/
             releaseUploadUrl=https://nexus.mahisoft.com/repository/maven-releases/" >> gradle.properties
             
-    - name: Build
-      run: |
-        test -e docker-compose.yml && docker-compose -f docker-compose.yml up -d || true
-        SPRING_PROFILES_ACTIVE=build ./gradlew clean check --info --init-script ./init.gradle
-        ./gradlew bootJar --init-script ./init.gradle
-            
     - name: Install and run sematic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -81,4 +75,5 @@ jobs:
       run: |
         docker login docker.pkg.github.com -u github.repository_owner --password ${{ github.token }}
         docker build . -t docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
-        docker push docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
+        EXPORT repo_name=${{ github.repository }}
+        docker push docker.pkg.github.com/"$(${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
