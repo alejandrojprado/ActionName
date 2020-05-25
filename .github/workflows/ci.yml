@@ -70,7 +70,7 @@ jobs:
     - name: latest tag
       id: latest-tag
       run: |
-        if [ ${{ github.base_ref }} = 'develop' ]
+        if [ '${{ github.base_ref }}' = 'develop' ]
         then 
           echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
         else
