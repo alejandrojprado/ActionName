@@ -60,7 +60,7 @@ jobs:
     - name: version tag
       id: version-tag
       run: |
-        if [ "$(git describe --tag)" = "" ]
+        if [ "${GITHUB_REF/refs\/tags\//}" = "" ]
         then
           echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
         else
@@ -70,7 +70,7 @@ jobs:
     - name: latest tag
       id: latest-tag
       run: |
-        if [ "${GITHUB_REF:11}" = "master" ]
+        if [ "${GITHUB_REF:11}" = "develop" ]
         then 
           echo "master"
         else
