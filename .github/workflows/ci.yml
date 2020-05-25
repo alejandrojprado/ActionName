@@ -4,6 +4,7 @@ on:
     branches: [ develop, master ]
 jobs:
   check-build-push:
+    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
