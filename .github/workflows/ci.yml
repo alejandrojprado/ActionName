@@ -8,10 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: |
-          git fetch --unshallow --tags
-          echo exit code $?
-          git tag --list
+    - run: git fetch --unshallow --tags
   
     - name: create configuration files
       env:
@@ -42,6 +39,12 @@ jobs:
             snapshotUploadUrl=https://nexus.mahisoft.com/repository/maven-snapshots/
             releaseUploadUrl=https://nexus.mahisoft.com/repository/maven-releases/" >> gradle.properties
             
+    - name: Build
+      run: |
+        test -e docker-compose.yml && docker-compose -f docker-compose.yml up -d || true
+        SPRING_PROFILES_ACTIVE=build ./gradlew clean check --info --init-script ./init.gradle
+        ./gradlew bootJar --init-script ./init.gradle
+            
     - name: Install and run sematic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,14 +64,9 @@ jobs:
     - name: version tag
       id: version-tag
       run: |
-        if [ "$(git describe --tag)" = "" ]
-        then
-          echo no tag
-          echo "::set-output name=VERSION_TAG::'0.1.0-${GITHUB_SHA::8}'"
-        else
-          echo "$(git discribe --tag)"
-          echo "::set-output name=VERSION_TAG::'$(git discribe --tag)'"
-        fi
+        echo "$(git describe --tag)"
+        echo "::set-output name=VERSION_TAG::'$(git describe --tag)'"
+
         
     - name: latest tag
       id: latest-tag
