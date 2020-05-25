@@ -4,11 +4,12 @@ on:
     branches: [ develop, master ]
 jobs:
   check-build-push:
-    
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: git fetch --unshallow --tags
+  
     - name: create configuration files
       env:
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
@@ -38,6 +39,12 @@ jobs:
             snapshotUploadUrl=https://nexus.mahisoft.com/repository/maven-snapshots/
             releaseUploadUrl=https://nexus.mahisoft.com/repository/maven-releases/" >> gradle.properties
             
+    - name: Build
+      run: |
+        test -e docker-compose.yml && docker-compose -f docker-compose.yml up -d || true
+        SPRING_PROFILES_ACTIVE=build ./gradlew clean check --info --init-script ./init.gradle
+        ./gradlew bootJar --init-script ./init.gradle
+            
     - name: Install and run sematic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +54,7 @@ jobs:
                 "plugins":[
                   "@semantic-release/commit-analyzer",
                   "@semantic-release/release-notes-generator",
-                  ["@semantic-release/exec", { "publish" : "--no-ci -t '${version}'" }]
+                  ["@semantic-release/exec", { "publish" : "--no-ci -t ${version}" }]
                 ]
               }' >> .releaserc
         sudo npm install -g --save-dev semantic-release
@@ -59,6 +66,7 @@ jobs:
       run: |
         echo "$(git describe --tag)"
         echo "::set-output name=VERSION_TAG::'$(git describe --tag)'"
+        
     - name: latest tag
       id: latest-tag
       run: |
@@ -71,4 +79,6 @@ jobs:
         
     - name: Build and push Docker image
       run: |
-        echo "${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}"
+        docker login docker.pkg.github.com -u github.repository_owner --password ${{ github.token }}
+        docker build . -t docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
+        docker push docker.pkg.github.com/${{ github.repository }}/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
