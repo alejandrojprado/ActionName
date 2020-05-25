@@ -53,7 +53,7 @@ jobs:
               }' >> .releaserc
         #sudo npm install -g --save-dev semantic-release
         #sudo npm -g install @semantic-release/git@8.0.0 @semantic-release/github @semantic-release/exec
-        semantic-release --branches master --repository-url ${{ github.repository }}
+        #semantic-release --branches master --repository-url ${{ github.repository }}
         
     - name: version tag
       id: version-tag
