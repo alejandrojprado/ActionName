@@ -70,11 +70,11 @@ jobs:
     - name: latest tag
       id: latest-tag
       run: |
-        if [ "${GITHUB_REF:11}" = "develop" ]
+        if [ "${GITHUB_REF:11}" = "master" ]
         then 
-          echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
+          echo "master"
         else
-          echo "::set-output name=LATEST_TAG::''"
+          echo "otro"
         fi
         
     - name: Build and push Docker image
