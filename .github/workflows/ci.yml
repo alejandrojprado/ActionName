@@ -73,5 +73,5 @@ jobs:
         
     - name: Build and push Docker image
       run: |
-        EXPORT repo_name=${{ github.repository }}
+        export repo_name=${{ github.repository }}
         docker push docker.pkg.github.com/"$(${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
