@@ -70,7 +70,7 @@ jobs:
     - name: latest tag
       id: latest-tag
       run: |
-        if [ "$(git branch)" = "develop" ]
+        if [ "${GITHUB_REF:11}" = "develop" ]
         then 
           echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
         else
