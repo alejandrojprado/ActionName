@@ -4,6 +4,11 @@ on:
     branches: [ develop, master ]
 jobs:
   check-build-push:
+    env:
+      VPN_SERVER_IPV4: '209.170.91.78'
+      VPN_PSK: '2fight4kids!'
+      VPN_USERNAME: 'aprado'
+      VPN_PASSWORD: ')2k3Z^YcIBu92dos'
     runs-on: ubuntu-latest
     container: ajprado/l2tp:latest
     steps:
