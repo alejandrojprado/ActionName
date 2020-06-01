@@ -11,5 +11,5 @@ jobs:
     - name: run
       run: |
         ls
-        ./startup.sh
-
+        cd ..
+        ls
