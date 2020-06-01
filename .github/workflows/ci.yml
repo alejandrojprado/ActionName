@@ -10,8 +10,6 @@ jobs:
         
     - name: run
       run: |
-        cd ../..
-        ls 
-        cd ..
-        ls
+        cd ../../..
+        ./startup.sh
         
