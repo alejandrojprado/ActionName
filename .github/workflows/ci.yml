@@ -6,46 +6,13 @@ jobs:
   check-build-push:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: git fetch --unshallow --tags
-    - name: Install and run sematic-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        echo '{
-                "branches": ["master"],
-                "plugins":[
-                  "@semantic-release/commit-analyzer",
-                  "@semantic-release/release-notes-generator",
-                  ["@semantic-release/exec", { "publish" : "--no-ci -t ${version}" }]
-                ]
-              }' >> .releaserc
-        sudo npm install -g --save-dev semantic-release
-        sudo npm -g install @semantic-release/git@8.0.0 @semantic-release/github @semantic-release/exec
-        semantic-release --branches master --repository-url ${{ github.repository }}
-        
-    - name: version tag
-      id: version-tag
-      run: |
-        echo "$(git describe --tag)"
-        echo "::set-output name=VERSION_TAG::'$(git describe --tag)'"
         
     - name: latest tag
       id: latest-tag
       run: |
-        if [ "${GITHUB_REF:11}" = "develop" ]
-        then 
-          echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
-        else
-          echo "::set-output name=LATEST_TAG::''"
-        fi
-        
-    - name: test
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        repository: ${{ github.repository }}
-        tags: "${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}"
+        sudo add-apt-repository -y ppa:nm-l2tp/network-manager-l2tp
+        sudo apt-get install -y network-manager-l2tp
+        sudo nmcli connection add connection.id test con-name test type VPN vpn-type l2tp ifname -- connection.autoconnect no ipv4.method auto vpn.data "gateway = 209.170.91.78, ipsec-enabled = yes, ipsec-psk = 0s"$(base64 <<<'2fight4kids!' | rev | cut -c2- | rev)"=, mru = 1400, mtu = 1400, password-flags = 0, refuse-chap = yes, refuse-mschap = yes, refuse-pap = yes, require-mppe = yes, user = aprado" vpn.secrets password=')2k3Z^YcIBu92dos'
+        sudo nmcli c up test
+
 
