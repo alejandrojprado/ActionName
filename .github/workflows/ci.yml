@@ -13,3 +13,5 @@ jobs:
         ls
         cd ..
         ls
+        cd ..
+        ls
