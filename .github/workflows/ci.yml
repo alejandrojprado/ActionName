@@ -12,6 +12,7 @@ jobs:
       run: |
         sudo add-apt-repository -y ppa:nm-l2tp/network-manager-l2tp
         sudo apt-get install -y network-manager-l2tp
+        sudo NetworkManager restart
         sudo nmcli connection add connection.id test con-name test type VPN vpn-type l2tp ifname -- connection.autoconnect no ipv4.method auto vpn.data "gateway = 209.170.91.78, ipsec-enabled = yes, ipsec-psk = 0s"$(base64 <<<'2fight4kids!' | rev | cut -c2- | rev)"=, mru = 1400, mtu = 1400, password-flags = 0, refuse-chap = yes, refuse-mschap = yes, refuse-pap = yes, require-mppe = yes, user = aprado" vpn.secrets password=')2k3Z^YcIBu92dos'
         sudo NetworkManager restart
         sudo nmcli c up test
