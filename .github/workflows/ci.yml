@@ -10,5 +10,7 @@ jobs:
         
     - name: run
       run: |
-        pwd
+        cd ../..
+        ls 
+        cd ..
         
