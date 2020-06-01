@@ -10,6 +10,6 @@ jobs:
         
     - name: run
       run: |
-        ls -la
+        ls
         ./startup.sh
 
