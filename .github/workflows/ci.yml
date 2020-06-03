@@ -19,10 +19,7 @@ jobs:
         
     - name: create file
       run: |
-        sudo su
-        echo "[keyfile]
-        unmanaged-devices=*,except:type:ethernet,except:type:wwan
-        " > /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
+        sudo sed 's/wifi/ethernet/' /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
     - name: restart
       run: |
         sudo cat /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
