@@ -24,6 +24,7 @@ jobs:
     - name: restart
       run: |
         sudo service network-manager restart
+        sudo nmcli
     - name: config nmcli
       run: |
         sudo nmcli connection modify ens4 ipv6.method ignore
