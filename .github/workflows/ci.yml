@@ -20,8 +20,6 @@ jobs:
     - name: create file
       run: |
         sudo sed 's/wifi/ethernet/' /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
-    - name: restart
-      run: |
         sudo cat /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
         sudo service network-manager restart
         sudo nmcli
