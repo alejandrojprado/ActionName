@@ -6,15 +6,28 @@ jobs:
   check-build-push:
     env:
       VPN_SERVER_IPV4: '209.170.91.78'
-      VPN_PSK: '2fight4kids!'
+      PSK: '2fight4kids!'
       VPN_USERNAME: 'aprado'
-      VPN_PASSWORD: ')2k3Z^YcIBu92dos'
+      PSW: ')2k3Z^YcIBu92dos'
     runs-on: ubuntu-latest
-    container: ajprado/l2tp:latest
     steps:
+        
+    - name: install
+      run: |
+        sudo add-apt-repository ppa:nm-l2tp/network-manager-l2tp
+        sudo apt-get install network-manager-l2tp
+    - name: create file
+      run: |
+        echo "[keyfile]
+        unmanaged-devices=*,except:type:wifi,except:type:wwan" >> /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
+    - name: restart
+      run: |
+        sudo service network-manager restart
+    - name: config nmcli
+      run: |
+        sudo nmcli connection modify ens4 ipv6.method ignore
+        sudo nmcli connection add connection.id CRC7 con-name CRC7 type VPN vpn-type l2tp ifname -- connection.autoconnect no ipv4.method auto vpn.data "gateway = 209.170.91.78, ipsec-enabled = yes, ipsec-psk = $PSK, mru = 1400, mtu = 1400, password-flags = 0, refuse-chap = yes, refuse-mschap = yes, refuse-pap = yes, require-mppe = yes, user = aprado" vpn.secrets password=$PSW
         
     - name: run
       run: |
-        cd ../../..
-        ./startup.sh
-        
+        sudo nmcli c up CRC7
