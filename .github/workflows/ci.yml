@@ -23,6 +23,7 @@ jobs:
         unmanaged-devices=*,except:type:wifi,except:type:wwan" >> sudo /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
     - name: restart
       run: |
+        sudo cat /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
         sudo service network-manager restart
         sudo nmcli
     - name: config nmcli
