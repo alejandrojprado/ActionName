@@ -27,7 +27,7 @@ jobs:
         sudo nmcli
     - name: config nmcli
       run: |
-        sudo nmcli connection modify ens4 ipv6.method ignore
+        sudo nmcli connection modify eth0 ipv6.method ignore
         sudo nmcli connection add connection.id CRC7 con-name CRC7 type VPN vpn-type l2tp ifname -- connection.autoconnect no ipv4.method auto vpn.data "gateway = 209.170.91.78, ipsec-enabled = yes, ipsec-psk = $PSK, mru = 1400, mtu = 1400, password-flags = 0, refuse-chap = yes, refuse-mschap = yes, refuse-pap = yes, require-mppe = yes, user = aprado" vpn.secrets password=$PSW
         
     - name: run
