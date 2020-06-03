@@ -16,9 +16,10 @@ jobs:
       run: |
         sudo add-apt-repository ppa:nm-l2tp/network-manager-l2tp
         sudo apt-get install network-manager-l2tp
+        
     - name: create file
       run: |
-        echo "[keyfile]
+        sudo echo "[keyfile]
         unmanaged-devices=*,except:type:wifi,except:type:wwan" >> /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
     - name: restart
       run: |
