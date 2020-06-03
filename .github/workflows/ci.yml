@@ -19,6 +19,8 @@ jobs:
         
     - name: create file
       run: |
+        sudo sed -ri 's/wifi/ethernet/' /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
+        sudo cat /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
         sudo sed 's/wifi/ethernet/' /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
         sudo cat /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
         sudo service network-manager restart
