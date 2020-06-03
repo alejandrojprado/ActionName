@@ -32,4 +32,5 @@ jobs:
         
     - name: run
       run: |
-        sudo nmcli c up CRC7
+        sudo nmcli c up CRC7 &
+        ping 10.207.100.26
