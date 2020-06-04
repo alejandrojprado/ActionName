@@ -41,7 +41,7 @@ jobs:
         
     - name: replace context
       run: |
-        kubectl config use-context mahisoft
+        kubectl get pods
         
     - name: get pods
       run: |
