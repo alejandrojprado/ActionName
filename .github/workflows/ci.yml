@@ -45,4 +45,4 @@ jobs:
         
     - name: get pods
       run: |
-        watch kubectl get pods
+        kubectl get pods
