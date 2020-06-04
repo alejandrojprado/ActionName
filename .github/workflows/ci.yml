@@ -41,7 +41,7 @@ jobs:
     steps:
     - name: create config file
       run: |
-        echo $KUBE_CONTEXT > config
+        echo "$KUBE_CONTEXT" > config
         
     - name: get pods
       run: |
