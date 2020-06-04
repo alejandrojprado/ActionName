@@ -3,7 +3,7 @@ on:
   push:
     branches: [ develop, master ]
 jobs:
-  Connect VPN:
+  connect-vpn:
     env:
       VPN_SERVER_IPV4: ${{ secrets.VPN_SERVER_IPV4 }}
       PSK: ${{ secrets.PSK }}
@@ -33,7 +33,7 @@ jobs:
     - name: run
       run: |
         sudo nmcli c up CRC7 &
-  Deploy:
+  deploy:
     env:
       KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
     runs-on: ubuntu-latest
