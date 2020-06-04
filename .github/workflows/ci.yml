@@ -133,4 +133,4 @@ jobs:
         sudo nmcli c up CRC7 &
         kubectl get pods
         helm ls
-        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository=$(cat tag/tag_version) --dry-run
+        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository="$(cat tag/tag_version)" --dry-run
