@@ -41,7 +41,7 @@ jobs:
         
     - name: replace context
       run: |
-        ls -la /Users
+        find / -name ".kube"
         export KUBECONFIG=./kube-config && echo $($KUBE_CONFIG | base64) > ./kube-config.yml
         cat ./kube-config.yml
         kubectl config use-context mahisoft --kubeconfig ./kube-config.yml
