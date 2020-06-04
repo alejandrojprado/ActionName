@@ -9,6 +9,8 @@ jobs:
       PSK: ${{ secrets.PSK }}
       VPN_USERNAME: ${{ secrets.VPN_USERNAME }}
       PSW: ${{ secrets.PSW }}
+      KUBE_CONTEXT: ${{ secrets.KUBE_CONFIG }}
+      KUBECONFIG: "./config"    
     runs-on: ubuntu-latest
     steps:
         
@@ -29,20 +31,11 @@ jobs:
       run: |
         sudo nmcli connection modify eth0 ipv6.method ignore
         sudo nmcli connection add connection.id CRC7 con-name CRC7 type VPN vpn-type l2tp ifname -- connection.autoconnect no ipv4.method auto vpn.data "gateway = $VPN_SERVER_IPV4 , ipsec-enabled = yes, ipsec-psk = $PSK, mru = 1400, mtu = 1400, password-flags = 0, refuse-chap = yes, refuse-mschap = yes, refuse-pap = yes, require-mppe = yes, user = $VPN_USERNAME" vpn.secrets password=$PSW
+    - name: create config file
+      run: |
+        echo "$KUBE_CONTEXT" > config        
         
     - name: run
       run: |
         sudo nmcli c up CRC7 &
-  deploy:
-    env:
-      KUBE_CONTEXT: ${{ secrets.KUBE_CONFIG }}
-      KUBECONFIG: "./config"
-    runs-on: ubuntu-latest
-    steps:
-    - name: create config file
-      run: |
-        echo "$KUBE_CONTEXT" > config
-        
-    - name: get pods
-      run: |
         kubectl get pods
