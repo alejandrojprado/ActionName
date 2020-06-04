@@ -2,98 +2,9 @@ name: CI
 on:
   push:
     branches: [ develop, master ]
-jobs:
-
-  check-build-push:
-
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: git fetch --unshallow --tags
-  
-    - name: create configuration files
-      env:
-        NEXUS_USER: ${{ secrets.NEXUS_USER }}
-        NEXUS_PASS: ${{ secrets.NEXUS_PASS }}
-      run: |
-        echo "initscript {
-                gradle.settingsEvaluated { settings ->
-                    settings.pluginManagement {
-                        repositories {
-                            maven {
-                                url 'https://nexus.mahisoft.com/repository/maven-public/'
-                                credentials {
-                                    Properties properties = new Properties()
-                                    properties.load(new File('./gradle.properties').newDataInputStream())
-                                    username properties.mahiNexusUsername
-                                    password properties.mahiNexusPassword
-                                }
-                            }
-                            gradlePluginPortal()
-                        }
-                    }
-                }
-            }" >> init.gradle
-        echo "mahiNexusUsername=$NEXUS_USER
-            mahiNexusPassword=$NEXUS_PASS
-            sharedMavenUrl=https://nexus.mahisoft.com/repository/maven-public/
-            snapshotUploadUrl=https://nexus.mahisoft.com/repository/maven-snapshots/
-            releaseUploadUrl=https://nexus.mahisoft.com/repository/maven-releases/" >> gradle.properties
-            
-    - name: Build
-      run: |
-        test -e docker-compose.yml && docker-compose -f docker-compose.yml up -d || true
-        SPRING_PROFILES_ACTIVE=build ./gradlew clean check --info --init-script ./init.gradle
-        ./gradlew bootJar --init-script ./init.gradle
-            
-    - name: Install and run sematic-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        echo '{
-                "branches": ["master"],
-                "plugins":[
-                  "@semantic-release/commit-analyzer",
-                  "@semantic-release/release-notes-generator",
-                  ["@semantic-release/exec", { "publish" : "--no-ci -t '${version}'" }]
-                ]
-              }' >> .releaserc
-        sudo npm install -g --save-dev semantic-release
-        sudo npm -g install @semantic-release/git@8.0.0 @semantic-release/github @semantic-release/exec
-        semantic-release --branches master --repository-url ${{ github.repository }}
-        
-    - name: version tag
-      id: version-tag
-      run: |
-        echo "$(git describe --tag)"
-        echo "::set-output name=VERSION_TAG::'$(git describe --tag)'"
-        
-    - name: latest tag
-      id: latest-tag
-      run: |
-        if [ "${GITHUB_REF:11}" = "develop" ]
-        then 
-          echo "::set-output name=LATEST_TAG::'-SNAPSHOT'"
-        else
-          echo "::set-output name=LATEST_TAG::''"
-        fi
-        
-    - name: Build and push Docker image
-      run: |
-        docker login docker.pkg.github.com -u github.repository_owner --password ${{ github.token }}
-        export repo_name=${{ github.repository }}
-        docker build . -t docker.pkg.github.com/"$(echo ${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
-        docker push docker.pkg.github.com/"$(echo ${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }}
-        echo docker.pkg.github.com/"$(echo ${repo_name,,})"/chat-service:${{ steps.version-tag.outputs.VERSION_TAG }}${{ steps.latest-tag.outputs.LATEST_TAG }} > tag_version
-        
-    - name: save build tag
-      uses: actions/upload-artifact@v1
-      with:
-        name: tag
-        path: tag_version 
+jobs
 
   deploy:
-    needs: check-build-push
     env:
       VPN_SERVER_IPV4: ${{ secrets.VPN_SERVER_IPV4 }}
       PSK: ${{ secrets.PSK }}
@@ -131,6 +42,4 @@ jobs:
     - name: run
       run: |
         sudo nmcli c up CRC7 &
-        kubectl get pods
-        helm ls
-        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository="$(cat tag/tag_version)" --dry-run
+        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository=docker.pkg.github.com/alejandrojprado/actionname/chat-service:v1.2.0-66-g69a4f68 --dry-run
