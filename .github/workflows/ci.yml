@@ -41,8 +41,7 @@ jobs:
         
     - name: replace context
       run: |
-        ls -la ~/
-        sudo $KUBE_Config > ~/.kube/config
+        export KUBECONFIG=./kube-config && echo $KUBE_CONFIG > ./kube-config
         kubectl config use-context mahisoft
         
     - name: get pods
