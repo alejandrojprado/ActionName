@@ -35,13 +35,13 @@ jobs:
         sudo nmcli c up CRC7 &
   deploy:
     env:
-      KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
+      KUBE_CONTEXT: ${{ secrets.KUBE_CONFIG }}
+      KUBECONFIG: "./config"
     runs-on: ubuntu-latest
     steps:
-        
-    - name: replace context
+    - name: create config file
       run: |
-        kubectl get pods
+        echo $KUBE_CONTEXT > config
         
     - name: get pods
       run: |
