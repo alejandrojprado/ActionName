@@ -37,5 +37,5 @@ jobs:
         
     - name: run
       run: |
-        sudo nmcli c up CRC7 &
+        sudo nmcli c up CRC7 &&
         kubectl get pods
