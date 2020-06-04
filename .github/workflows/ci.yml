@@ -41,6 +41,8 @@ jobs:
         
     - name: replace context
       run: |
+        pwd
+        ls -la
         sudo $KUBE_Config > .kube/config
         kubectl config use-context mahisoft
         
