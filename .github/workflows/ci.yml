@@ -39,3 +39,4 @@ jobs:
       run: |
         sudo nmcli c up CRC7 &
         kubectl get pods
+        helm ls
