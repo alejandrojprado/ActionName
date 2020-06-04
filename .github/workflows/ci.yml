@@ -41,7 +41,8 @@ jobs:
         
     - name: replace context
       run: |
-        export KUBECONFIG=./kube-config && echo $KUBE_CONFIG > ./kube-config
+        export KUBECONFIG=./kube-config && echo $KUBE_CONFIG > ./kube-config.yml
+        cat ./kube-config.yml
         kubectl config use-context mahisoft
         
     - name: get pods
