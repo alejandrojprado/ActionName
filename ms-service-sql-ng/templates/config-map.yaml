@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "ms-service-sql-ng.fullname" . }}
+data:
+  SPRING_PROFILES_ACTIVE: {{ .Values.springProfilesActive }}
+  CONFIG_SERVER_URL: {{ .Values.configServerUrl }}
+  SERVER_PORT: !!str {{ .Values.server.port }}
+  SERVER_CONTEXT_PATH: {{ .Values.server.contextPath }}
+  SERVER_SERVLET_CONTEXT_PATH: {{ .Values.server.contextPath }}
+  JAVA_OPTS: "-Xms{{.Values.server.Xms}} -Xmx{{.Values.server.Xmx}} -XX:MaxDirectMemorySize={{.Values.server.MaxDirectoryMemorySize}} -XX:MaxMetaspaceSize={{.Values.server.MaxMetaspaceSize}} -XX:ReservedCodeCacheSize={{.Values.server.ReservedCodeCacheSize}} -XX:{{.Values.server.GarbageCollector}} -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1"

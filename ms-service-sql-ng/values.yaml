@@ -1,0 +1,57 @@
+# How many replicas the service needs to have deployed concurrently
+replicaCount: 1
+
+# Docker image section use snapshots for development purposes
+# fixed release versions for production
+image:
+  tag: 1.0.0-SNAPSHOT
+  pullPolicy: Always
+
+# By default all micro services receive connections in port 80
+service:
+  type: ClusterIP
+  internalPort: 80
+  externalPort: 80
+
+# Services are accessed through BFF or gateways not the public
+ingress:
+  enabled: false
+
+# Memory and processor limits of the service
+resources:
+  limits:
+    memory: 600Mi
+  requests:
+    cpu: 20m
+    memory: 64Mi
+
+# Liveness and readiness probe configuration
+livenessProbe:
+  path: /health
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+  periodSeconds: 30
+  failureThreshold: 15
+readinessProbe:
+  path: /health
+  initialDelaySeconds: 80
+  timeoutSeconds: 5
+  periodSeconds: 30
+  failureThreshold: 15
+
+# Spring specific configuration active profiles in Kubernetes
+springProfilesActive: cloud,ci,doc,no_kafka
+
+# Spring specific configuration URI to the config server (if using cloud config)
+configServerUrl: http://ms-config:8888
+
+# Spring service context path, port and JVM limits
+server:
+  contextPath: /api
+  port: 80
+  Xms: "20M"
+  Xmx: "200M"
+  MaxMetaspaceSize: "85M"
+  MaxDirectoryMemorySize: "10M"
+  ReservedCodeCacheSize: "180M"
+  GarbageCollector: "+UseParallelGC"
