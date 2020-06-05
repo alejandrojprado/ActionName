@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "ms-service-sql-ng.fullname" . }}
+  name: {{ .Values.service.name}}
   labels:
     app: {{ .Values.service.name}}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
