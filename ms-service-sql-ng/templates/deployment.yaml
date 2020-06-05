@@ -19,9 +19,6 @@ spec:
         release: {{ .Release.Name }}
         serviceid: {{ .Values.service.name }}
     spec:
-      selector:
-        matchLabels:
-          app: {{ .Values.service.name}}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
