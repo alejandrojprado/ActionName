@@ -27,4 +27,4 @@ server:
     
 selector:
   matchLabels:
-    app: ms-chat-service
+    app: chat-service-backend
