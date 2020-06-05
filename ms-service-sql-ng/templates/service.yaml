@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: {{ .Values.service.name }}
   selector:
-    app: {{ template "ms-service-sql-ng.name" . }}
+    app: {{ .Values.service.name }}
     release: {{ .Release.Name }}
