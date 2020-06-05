@@ -24,3 +24,7 @@ readinessProbe:
 server:
     xms: "64m"
     xmx: "450m"
+    
+selector:
+  matchLabels:
+    app: ms-chat-service
