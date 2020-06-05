@@ -1,0 +1,29 @@
+image:
+  repository: gcr.io/kamino-182816/social-coach-ms-account-service
+  tag:
+  pullPolicy: Always
+
+service:
+    name: ms-account
+    
+resources:
+limits:
+    cpu: 300m
+    memory: 460Mi
+requests:
+    cpu: 50m
+    memory: 64Mi
+    
+springProfilesActive: cloud,ci,dov
+
+livenessProbe:
+    path: /api/actuator/health
+readinessProbe:
+    path: /api/actuator/health
+    
+server:
+    xms: "64m"
+    xmx: "450m"
+
+imagePullSecrets:
+    - name: gcr-json-key
