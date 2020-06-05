@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: iofs
       run: |
-        "docker.pkg.github.com/alejandrojprado/actionname/chat-service:v1.2.0-66-g69a4f68" > tag_version
+        echo "docker.pkg.github.com/alejandrojprado/actionname/chat-service:v1.2.0-66-g69a4f68" > tag_version
       
     - name: save build tag
       uses: actions/upload-artifact@v1
