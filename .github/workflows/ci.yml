@@ -65,4 +65,4 @@ jobs:
         
     - name: deploy
       run: |
-        helm upgrade -i chat-service-backend ./ms-service-sql-ng/ --reset-values --recreate-pods -f ms-account-service/values.yml --set image.repository="$(echo tag/tag_version)"  --set Deployment.spec.selector.name=chat-service-backend
+        helm upgrade -i chat-service-backend ./ms-service-sql-ng/ --reset-values --recreate-pods -f ms-account-service/values.yml --set image.repository="$(echo tag/tag_version)"  --set spec.selector.matchLabels.app=chat-service-backend
