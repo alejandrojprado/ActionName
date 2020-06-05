@@ -62,4 +62,5 @@ jobs:
       run: |
         helm ls
         sed -ri 's*apps/v1*extensions/v1beta1*' ./ms-service-sql-ng/templates/deployment.yaml
+        cat ./ms-service-sql-ng/templates/deployment.yaml
         helm upgrade -i chat-service-backend ./ms-service-sql-ng/ --reset-values --recreate-pods --set image.repository="$(echo tag/tag_version)" --dry-run
