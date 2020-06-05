@@ -11,7 +11,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.service.name}}
+      app: {{ template "ms-service-sql-ng.fullname" . }}
   template:
     metadata:
       labels:
