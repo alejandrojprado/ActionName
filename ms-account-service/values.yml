@@ -4,7 +4,7 @@ image:
   pullPolicy: Always
 
 service:
-    name: ms-chat-service
+    name: chat-service-backend
     
 resources:
 limits:
