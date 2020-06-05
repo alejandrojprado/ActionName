@@ -66,4 +66,4 @@ jobs:
     - name: deploy
       run: |
         helm ls
-        helm upgrade -i chat-service-backend ./ms-service-sql-ng/ --reset-values --recreate-pods -f ms-account-service/values.yml --set image.repository="$(echo tag/tag_version)" --dry-run
+        helm upgrade -i chat-service-backend ./ms-service-sql-ng/ --reset-values --recreate-pods -f ms-account-service/values.yml --set image.repository="$(echo tag/tag_version)"  --set spec.selector.name: chat-service-backend
