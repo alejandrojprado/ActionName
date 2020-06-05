@@ -4,7 +4,22 @@ on:
     branches: [ develop, master ]
 jobs:
 
+  check-build-push:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: iofs
+      run: |
+        "docker.pkg.github.com/alejandrojprado/actionname/chat-service:v1.2.0-66-g69a4f68" > tag_version
+      
+    - name: save build tag
+      uses: actions/upload-artifact@v1
+      with:
+        name: tag
+        path: tag_version 
+
   deploy:
+    needs: check-build-push
     env:
       VPN_SERVER_IPV4: ${{ secrets.VPN_SERVER_IPV4 }}
       PSK: ${{ secrets.PSK }}
@@ -41,5 +56,8 @@ jobs:
     
     - name: run
       run: |
+        ls tag
         sudo nmcli c up CRC7 &
         kubectl get pods
+        helm ls
+        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository="$(echo tag/tag_version)" --dry-run
