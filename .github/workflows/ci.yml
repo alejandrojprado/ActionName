@@ -34,7 +34,12 @@ jobs:
       run: |
         echo "$KUBE_CONTEXT" > config        
     
+    - name: Download tag
+      uses: actions/download-artifact@v1
+      with:
+        name: tag
+    
     - name: run
       run: |
         sudo nmcli c up CRC7 &
-        helm upgrade -i chat-service-backend ./ms-service-sql-ng --namespace chat --reset-values --recreate-pods --set image.repository=docker.pkg.github.com/alejandrojprado/actionname/chat-service:v1.2.0-66-g69a4f68 --dry-run
+        kubectl get pods
