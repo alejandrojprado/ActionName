@@ -55,7 +55,7 @@ jobs:
         echo "$KUBE_CONTEXT" > config        
     
     - name: Download tag
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v4.1.7
       with:
         name: tag
     
